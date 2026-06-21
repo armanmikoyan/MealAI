@@ -28,7 +28,7 @@ Feature folders live under **`app/components/<kebab-case-name>/`**. Typical layo
 - **`state.ts`** — **Jotai** atoms and related client state (single file, not a folder).
 - **`utils.ts`** — pure helpers, no Jotai (single file, not a folder).
 
-Shared **design-system** primitives live under **`app/ui/`** (e.g. `button.tsx`). Import the file you need (e.g. `@/app/ui/button`) — no barrel in `app/ui/`. **App chrome** (nav, shell, marketing blocks) lives under **`app/components/<kebab-name>/`** (e.g. `nav-bar/`), not in `app/ui/`.
+**`app/ui/`** is for **design-system** controls built on Base UI / shadcn-style patterns (e.g. `button.tsx`). Import the file you need (e.g. `@/app/ui/button`) — no barrel in `app/ui/`. **App chrome**, marketing sections, and **reusable composition components** (e.g. `scroll/`, `icon-text-card/`) live under **`app/components/<kebab-name>/`**, not in `app/ui/`.
 
 App-wide **metadata** strings used only by the root layout live in **`app/layout.tsx`** next to `export const metadata` (e.g. `SITE_METADATA` with **SCREAMING_SNAKE_CASE** keys — same convention as feature `constants.ts`).
 

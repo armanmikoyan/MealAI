@@ -6,10 +6,6 @@ export const PRICING_SECTION = {
   CHECKOUT_NOTE: 'Checkout coming soon',
 } as const;
 
-/** Same intent as hero enter rows: respect `prefers-reduced-motion` on scroll-in. */
-export const PRICING_ENTER_MOTION_REDUCE =
-  'motion-reduce:!animate-none motion-reduce:!opacity-100 motion-reduce:!transform-none motion-reduce:!filter-none' as const;
-
 export const PRICING_TIERS = [
   {
     ID: 'basic',

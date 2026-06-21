@@ -27,7 +27,21 @@ export function Navbar() {
           </Link>
         </div>
 
-        <div className="text-content-muted ml-auto flex shrink-0 items-center gap-8 text-base font-medium">
+        <div className="text-content-muted ml-auto flex shrink-0 flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm font-medium sm:gap-x-8 sm:text-base">
+          <Link
+            href="/#how-it-works"
+            className="hover:text-content transition-colors"
+            aria-label={`${NAV.HOW_IT_WORKS} — jump to section`}
+          >
+            {NAV.HOW_IT_WORKS}
+          </Link>
+          <Link
+            href="/#features"
+            className="hover:text-content transition-colors"
+            aria-label={`${NAV.FEATURES} — jump to section`}
+          >
+            {NAV.FEATURES}
+          </Link>
           <Link
             href="/#pricing"
             className="hover:text-content transition-colors"
