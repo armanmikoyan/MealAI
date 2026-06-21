@@ -11,7 +11,7 @@ export function HeroNutrientTile({
   ICON_BG_CLASS,
 }: HeroNutrientTileProps) {
   return (
-    <div className="border-edge-strong bg-surface-overlay/25 hover:border-edge-strong hover:bg-surface-overlay/40 flex gap-2 rounded-lg border px-2 py-2 transition-colors sm:gap-2.5 sm:px-2.5 sm:py-2">
+    <div className="border-edge-strong bg-surface-overlay/25 hover:border-edge-strong hover:bg-surface-overlay/40 flex  min-w-0 gap-2 rounded-lg border px-2 py-2 transition-colors sm:gap-2.5 sm:px-2.5 sm:py-2">
       <div
         className={cn(
           'flex size-8 shrink-0 items-center justify-center rounded-md sm:size-9',

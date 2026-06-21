@@ -7,11 +7,11 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="border-edge/60 border-t bg-canvas py-16 sm:py-20 lg:py-24"
+      className="border-edge/60 scroll-mt-28 border-t bg-canvas py-16 sm:py-20 lg:py-24"
       aria-labelledby="how-it-works-heading"
     >
       <ScrollEnter
-        className="mx-auto w-full max-w-[min(90rem,calc(100vw-1.5rem))] px-4 sm:px-6 lg:px-10"
+        className="layout-page-shell"
         rows={[
           {
             KEY: 'body',

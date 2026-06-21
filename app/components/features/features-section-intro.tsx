@@ -2,7 +2,7 @@ import { FEATURES_SECTION } from './constants';
 
 export function FeaturesSectionIntro() {
   return (
-    <div className="mx-auto max-w-2xl text-center">
+    <div className="mx-auto max-w-3xl text-center">
       <p className="text-content-muted font-mono text-[11px] font-medium tracking-widest uppercase sm:text-xs">
         {FEATURES_SECTION.EYEBROW}
       </p>

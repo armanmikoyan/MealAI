@@ -100,13 +100,16 @@ export const HERO_TYPEWRITER_CARET_REDUCE_CLASS =
 
 export const HERO_INTRO_TYPE_START_MS = 380 as const;
 
+/** Extra `|` marks after the blinking caret; staggered animation reads as a left→right sweep. */
+export const HERO_INTRO_CARET_ECHO_COUNT = 4 as const;
+
 export const HERO_INTRO_LINES = [
   {
     KEY: 'h',
     EL: 'h1',
     ID: 'hero-heading',
     SHELL: 'text-content font-heading text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl',
-    CARET: 'hero-typewriter-caret text-content-muted ml-0.5 inline-block align-baseline font-light',
+    CARET: 'hero-typewriter-caret text-content-muted inline-block align-baseline font-light',
     TEXT: HERO.HEADING,
     MS: 26,
   },
@@ -114,8 +117,8 @@ export const HERO_INTRO_LINES = [
     KEY: 's',
     EL: 'p',
     ID: undefined,
-    SHELL: 'text-content-muted mt-3 max-w-2xl text-base leading-relaxed sm:text-lg',
-    CARET: 'hero-typewriter-caret text-content-muted/80 ml-0.5 inline-block align-baseline font-light',
+    SHELL: 'text-content-muted mt-3 max-w-3xl text-base leading-relaxed sm:text-lg',
+    CARET: 'hero-typewriter-caret text-content-muted/80 inline-block align-baseline font-light',
     TEXT: HERO.SUBHEAD,
     MS: 11,
   },
@@ -123,19 +126,20 @@ export const HERO_INTRO_LINES = [
 
 export type HeroIntroLineKey = (typeof HERO_INTRO_LINES)[number]['KEY'];
 
+/** Upload | arrow | result from `md` up; stacked on small screens. */
 export const HERO_ENTER_GRID_SHELL =
-  'grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(4.75rem,5.5rem)_minmax(0,1fr)] lg:items-stretch lg:gap-5' as const;
+  'relative grid min-w-0 grid-cols-1 gap-4 overflow-x-clip [&>*]:min-w-0 md:grid-cols-[minmax(0,1fr)_minmax(2.5rem,4rem)_minmax(0,1fr)] md:items-stretch md:gap-4' as const;
 
 export const HERO_ENTER_SHELL_BLOCKS = [
   {
     ID: 'intro',
     SHELL:
-      'hero-enter animate-in fade-in fill-mode-both max-w-4xl duration-1000 ease-out',
+      'hero-enter animate-in fade-in fill-mode-both max-w-5xl duration-1000 ease-out',
   },
   {
     ID: 'grid',
     SHELL:
-      'hero-enter animate-in fade-in fill-mode-both mt-8 max-lg:slide-in-from-bottom-4 space-y-2 delay-200 duration-700 ease-out sm:mt-10 sm:space-y-2.5 lg:mt-10 lg:space-y-2',
+        'hero-enter animate-in fade-in fill-mode-both mt-8 max-lg:slide-in-from-bottom-4 space-y-2 delay-200 duration-700 ease-out sm:mt-10 sm:space-y-2.5 md:mt-10 md:space-y-2 lg:mt-10 lg:space-y-2',
   },
 ] as const;
 

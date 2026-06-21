@@ -1,19 +1,19 @@
-import { HOW_IT_WORKS } from './constants';
+import { USE_CASES_SECTION } from './constants';
 
-export function HowItWorksSectionIntro() {
+export function UseCasesSectionIntro() {
   return (
     <div className="mx-auto max-w-3xl text-center">
       <p className="text-content-muted font-mono text-[11px] font-medium tracking-widest uppercase sm:text-xs">
-        {HOW_IT_WORKS.EYEBROW}
+        {USE_CASES_SECTION.EYEBROW}
       </p>
       <h2
-        id="how-it-works-heading"
+        id="use-cases-heading"
         className="text-content mt-2 text-2xl font-semibold tracking-tight sm:text-3xl"
       >
-        {HOW_IT_WORKS.TITLE}
+        {USE_CASES_SECTION.TITLE}
       </h2>
       <p className="text-content-muted mt-3 text-sm leading-relaxed sm:text-base">
-        {HOW_IT_WORKS.SUBTITLE}
+        {USE_CASES_SECTION.SUBTITLE}
       </p>
     </div>
   );

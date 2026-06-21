@@ -1,0 +1,36 @@
+@keyframes feedback-marquee-toward-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes feedback-marquee-toward-right {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@layer components {
+  .feedback-marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+
+  .feedback-marquee-track--toward-left {
+    will-change: transform;
+    animation: feedback-marquee-toward-left 42s linear infinite;
+  }
+
+  .feedback-marquee-track--toward-right {
+    will-change: transform;
+    animation: feedback-marquee-toward-right 48s linear infinite;
+  }
+}

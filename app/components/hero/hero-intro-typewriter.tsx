@@ -1,10 +1,12 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 import {
   type HeroIntroLineKey,
+  HERO_INTRO_CARET_ECHO_COUNT,
   HERO_INTRO_LINES,
   HERO_INTRO_TYPE_START_MS,
   HERO_TYPEWRITER_CARET_REDUCE_CLASS,
@@ -66,7 +68,25 @@ export function HeroIntroTypewriter() {
               <span className="col-start-1 row-start-1">
                 {TEXT.slice(0, len)}
                 {showCaret ? (
-                  <span className={cn(CARET, HERO_TYPEWRITER_CARET_REDUCE_CLASS)}>|</span>
+                  <span
+                    className="hero-typewriter-carets ml-0.5 inline-flex select-none items-baseline"
+                    aria-hidden
+                  >
+                    <span className={cn(CARET, HERO_TYPEWRITER_CARET_REDUCE_CLASS)}>|</span>
+                    {Array.from({ length: HERO_INTRO_CARET_ECHO_COUNT }, (_, echoIndex) => (
+                      <span
+                        key={echoIndex}
+                        className="hero-typewriter-caret-echo text-content-muted/50 inline-block align-baseline font-light"
+                        style={
+                          {
+                            '--hero-caret-trail-i': echoIndex,
+                          } as CSSProperties
+                        }
+                      >
+                        |
+                      </span>
+                    ))}
+                  </span>
                 ) : null}
               </span>
             </span>

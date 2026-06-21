@@ -29,7 +29,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-pt-28 scroll-smooth antialiased motion-reduce:scroll-auto`}
+    >
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         <Navbar />
         <main className="flex min-h-0 flex-1 flex-col">

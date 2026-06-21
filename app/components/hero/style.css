@@ -57,6 +57,16 @@
   }
 }
 
+@keyframes hero-typewriter-trail-sweep {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+  45% {
+    opacity: 0.72;
+  }
+}
+
 @layer components {
   .hero-aurora-blob {
     position: absolute;
@@ -86,5 +96,24 @@
 
   .hero-typewriter-caret {
     animation: hero-typewriter-caret-blink 1s step-end infinite;
+  }
+
+  .hero-typewriter-carets {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
+  }
+
+  .hero-typewriter-caret-echo {
+    margin-inline-start: -0.07em;
+    animation: hero-typewriter-trail-sweep 1.05s ease-in-out infinite;
+    animation-delay: calc(var(--hero-caret-trail-i, 0) * 110ms);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-typewriter-caret-echo {
+      animation: none;
+      opacity: 0.28;
+    }
   }
 }
