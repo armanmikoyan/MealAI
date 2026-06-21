@@ -1,26 +1,38 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* App palette + fonts. Geist vars come from next/font on <html>. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-raised: #111111;
+  --color-surface-overlay: #171717;
+  --color-edge-soft: #141414;
+  --color-edge: #27272a;
+  --color-edge-strong: #3f3f46;
+  --color-content: #fafafa;
+  --color-content-muted: #a1a1aa;
+  --color-content-subtle: #71717a;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  --font-heading: var(--font-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-edge outline-edge-strong/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-canvas text-content;
+  }
+
+  html {
+    @apply font-sans;
+  }
 }
