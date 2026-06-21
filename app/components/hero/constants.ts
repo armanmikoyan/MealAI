@@ -147,27 +147,27 @@ export const HERO_AURORA_BLOB_CLASSNAMES = [
 
 /** Scatter in the top grid row only (`TOP` / `LEFT` are % of that row, never the upload card). */
 export const HERO_UPLOAD_DECOR_TOP: readonly HeroUploadDecorGlyph[] = [
-  { ICON: LeafyGreen, ICON_CLASS: 'text-emerald-400/90', TOP: '52%', LEFT: '10%', ROTATE: '-10deg' },
-  { ICON: Beef, ICON_CLASS: 'text-rose-400/95', TOP: '38%', LEFT: '30%', ROTATE: '-7deg' },
-  { ICON: Donut, ICON_CLASS: 'text-fuchsia-300/85', TOP: '48%', LEFT: '50%', ROTATE: '9deg' },
-  { ICON: Beaker, ICON_CLASS: 'text-violet-300/90', TOP: '35%', LEFT: '70%', ROTATE: '-8deg' },
-  { ICON: Fish, ICON_CLASS: 'text-sky-400/90', TOP: '55%', LEFT: '90%', ROTATE: '11deg' },
+  { ICON: LeafyGreen, ICON_CLASS: 'text-positive/90', TOP: '52%', LEFT: '10%', ROTATE: '-10deg' },
+  { ICON: Beef, ICON_CLASS: 'text-macro-protein/95', TOP: '38%', LEFT: '30%', ROTATE: '-7deg' },
+  { ICON: Donut, ICON_CLASS: 'text-macro-sat/85', TOP: '48%', LEFT: '50%', ROTATE: '9deg' },
+  { ICON: Beaker, ICON_CLASS: 'text-macro-sodium/90', TOP: '35%', LEFT: '70%', ROTATE: '-8deg' },
+  { ICON: Fish, ICON_CLASS: 'text-macro-fat-strong/90', TOP: '55%', LEFT: '90%', ROTATE: '11deg' },
 ];
 
 /** Scatter in the bottom grid row only. */
 export const HERO_UPLOAD_DECOR_BOTTOM: readonly HeroUploadDecorGlyph[] = [
-  { ICON: Sprout, ICON_CLASS: 'text-emerald-400/95', TOP: '54%', LEFT: '8%', ROTATE: '-5deg' },
-  { ICON: Droplet, ICON_CLASS: 'text-sky-300/90', TOP: '42%', LEFT: '25%', ROTATE: '6deg' },
-  { ICON: Wheat, ICON_CLASS: 'text-amber-200/90', TOP: '58%', LEFT: '42%', ROTATE: '-11deg' },
-  { ICON: Candy, ICON_CLASS: 'text-pink-300/90', TOP: '38%', LEFT: '58%', ROTATE: '7deg' },
-  { ICON: Flame, ICON_CLASS: 'text-amber-300/95', TOP: '50%', LEFT: '75%', ROTATE: '12deg' },
-  { ICON: Battery, ICON_CLASS: 'text-lime-300/85', TOP: '46%', LEFT: '92%', ROTATE: '-6deg' },
+  { ICON: Sprout, ICON_CLASS: 'text-positive/95', TOP: '54%', LEFT: '8%', ROTATE: '-5deg' },
+  { ICON: Droplet, ICON_CLASS: 'text-macro-fat/90', TOP: '42%', LEFT: '25%', ROTATE: '6deg' },
+  { ICON: Wheat, ICON_CLASS: 'text-accent-soft/90', TOP: '58%', LEFT: '42%', ROTATE: '-11deg' },
+  { ICON: Candy, ICON_CLASS: 'text-macro-sugar/90', TOP: '38%', LEFT: '58%', ROTATE: '7deg' },
+  { ICON: Flame, ICON_CLASS: 'text-accent-mid/95', TOP: '50%', LEFT: '75%', ROTATE: '12deg' },
+  { ICON: Battery, ICON_CLASS: 'text-macro-potassium/85', TOP: '46%', LEFT: '92%', ROTATE: '-6deg' },
 ];
 
 export const HERO_MOCK_MEAL_CHIP_ROWS: readonly HeroMockMealChipRow[] = [
   {
     ICON: LeafyGreen,
-    ICON_CLASS: 'size-3.5 text-emerald-400/90',
+    ICON_CLASS: 'size-3.5 text-positive/90',
     TEXT: HERO.CHIP_LEAFY,
   },
   {
@@ -177,7 +177,7 @@ export const HERO_MOCK_MEAL_CHIP_ROWS: readonly HeroMockMealChipRow[] = [
   },
   {
     ICON: Fish,
-    ICON_CLASS: 'text-sky-400/90 size-3.5',
+    ICON_CLASS: 'text-macro-fat-strong/90 size-3.5',
     TEXT: HERO.CHIP_PROTEIN,
   },
 ];
@@ -188,63 +188,63 @@ export const HERO_NUTRIENT_TILE_ROWS: readonly HeroNutrientTileRowModel[] = [
     LABEL: HERO.PROTEIN_STAT_LABEL,
     VALUE: HERO.PROTEIN_VALUE,
     UNIT: HERO.PROTEIN_UNIT,
-    ICON_CLASS: 'text-rose-400/95',
-    ICON_BG_CLASS: 'bg-rose-500/12 ring-1 ring-rose-400/15',
+    ICON_CLASS: 'text-macro-protein/95',
+    ICON_BG_CLASS: 'bg-macro-protein/12 ring-1 ring-macro-protein/15',
   },
   {
     ICON: Wheat,
     LABEL: HERO.CARBS_STAT_LABEL,
     VALUE: HERO.CARBS_VALUE,
     UNIT: HERO.CARBS_UNIT,
-    ICON_CLASS: 'text-amber-200/90',
-    ICON_BG_CLASS: 'bg-amber-400/10 ring-1 ring-amber-300/12',
+    ICON_CLASS: 'text-accent-soft/90',
+    ICON_BG_CLASS: 'bg-accent/10 ring-1 ring-accent/12',
   },
   {
     ICON: Droplet,
     LABEL: HERO.FAT_STAT_LABEL,
     VALUE: HERO.FAT_VALUE,
     UNIT: HERO.FAT_UNIT,
-    ICON_CLASS: 'text-sky-300/90',
-    ICON_BG_CLASS: 'bg-sky-500/12 ring-1 ring-sky-400/15',
+    ICON_CLASS: 'text-macro-fat/90',
+    ICON_BG_CLASS: 'bg-macro-fat-strong/12 ring-1 ring-macro-fat-strong/15',
   },
   {
     ICON: Sprout,
     LABEL: HERO.FIBER_STAT_LABEL,
     VALUE: HERO.FIBER_VALUE,
     UNIT: HERO.FIBER_UNIT,
-    ICON_CLASS: 'text-emerald-400/95',
-    ICON_BG_CLASS: 'bg-emerald-500/12 ring-1 ring-emerald-400/15',
+    ICON_CLASS: 'text-positive/95',
+    ICON_BG_CLASS: 'bg-positive/12 ring-1 ring-positive/15',
   },
   {
     ICON: Donut,
     LABEL: HERO.SAT_FAT_LABEL,
     VALUE: HERO.SAT_FAT_VALUE,
     UNIT: HERO.SAT_FAT_UNIT,
-    ICON_CLASS: 'text-fuchsia-300/85',
-    ICON_BG_CLASS: 'bg-fuchsia-500/10 ring-1 ring-fuchsia-400/12',
+    ICON_CLASS: 'text-macro-sat/85',
+    ICON_BG_CLASS: 'bg-macro-sat/10 ring-1 ring-macro-sat/12',
   },
   {
     ICON: Candy,
     LABEL: HERO.SUGAR_LABEL,
     VALUE: HERO.SUGAR_VALUE,
     UNIT: HERO.SUGAR_UNIT,
-    ICON_CLASS: 'text-pink-300/90',
-    ICON_BG_CLASS: 'bg-pink-500/10 ring-1 ring-pink-400/12',
+    ICON_CLASS: 'text-macro-sugar/90',
+    ICON_BG_CLASS: 'bg-macro-sugar/10 ring-1 ring-macro-sugar/12',
   },
   {
     ICON: Beaker,
     LABEL: HERO.SODIUM_LABEL,
     VALUE: HERO.SODIUM_VALUE,
     UNIT: HERO.SODIUM_UNIT,
-    ICON_CLASS: 'text-violet-300/90',
-    ICON_BG_CLASS: 'bg-violet-500/12 ring-1 ring-violet-400/15',
+    ICON_CLASS: 'text-macro-sodium/90',
+    ICON_BG_CLASS: 'bg-macro-sodium/12 ring-1 ring-macro-sodium/15',
   },
   {
     ICON: Battery,
     LABEL: HERO.POTASSIUM_LABEL,
     VALUE: HERO.POTASSIUM_VALUE,
     UNIT: HERO.POTASSIUM_UNIT,
-    ICON_CLASS: 'text-lime-300/85',
-    ICON_BG_CLASS: 'bg-lime-500/10 ring-1 ring-lime-400/12',
+    ICON_CLASS: 'text-macro-potassium/85',
+    ICON_BG_CLASS: 'bg-macro-potassium/10 ring-1 ring-macro-potassium/12',
   },
 ];

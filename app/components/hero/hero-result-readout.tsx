@@ -51,7 +51,7 @@ export default function HeroResultReadout() {
             </p>
             <p className="text-content-muted flex items-center gap-1.5 text-xs sm:text-sm">
               <CheckCircle2
-                className="text-emerald-400/90 size-3.5 shrink-0 sm:size-4"
+                className="text-positive/90 size-3.5 shrink-0 sm:size-4"
                 aria-hidden
               />
               {HERO.MOCK_CONFIDENCE}
@@ -83,10 +83,10 @@ export default function HeroResultReadout() {
             </p>
           </div>
 
-          <div className="border-edge-strong overflow-hidden rounded-xl border bg-linear-to-br from-amber-500/12 via-surface-overlay/60 to-surface-raised/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+          <div className="border-edge-strong overflow-hidden rounded-xl border bg-linear-to-br from-accent/12 via-surface-overlay/60 to-surface-raised/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div className="flex flex-col gap-3 p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-4">
               <div className="flex items-center gap-3">
-                <div className="bg-amber-500/18 text-amber-300/95 flex size-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-amber-400/25 sm:size-12">
+                <div className="bg-accent/18 text-accent-mid/95 flex size-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-accent/25 sm:size-12">
                   <Flame className="size-5 sm:size-6" strokeWidth={1.5} aria-hidden />
                 </div>
                 <div>

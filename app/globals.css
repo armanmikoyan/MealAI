@@ -19,6 +19,32 @@
   --color-content-muted: #a1a1aa;
   --color-content-subtle: #71717a;
 
+  --color-positive: #34d399;
+  --color-accent: #fbbf24;
+  --color-accent-soft: #fde68a;
+  --color-accent-mid: #fcd34d;
+  --color-macro-protein: #fb7185;
+  --color-macro-fat: #7dd3fc;
+  --color-macro-fat-strong: #38bdf8;
+  --color-macro-sat: #e879f9;
+  --color-macro-sugar: #f9a8d4;
+  --color-macro-sodium: #c4b5fd;
+  --color-macro-potassium: #bef264;
+  --color-danger: #f87171;
+  /* Button / control surfaces (match prior zinc scale on dark canvas). */
+  --color-button-default-bg: #f4f4f5;
+  --color-button-default-fg: #09090b;
+  --color-button-default-hover: #e4e4e7;
+  --color-button-outline-border: #52525b;
+  --color-button-outline-surface: #09090b;
+  --color-button-outline-hover: #18181b;
+  --color-button-secondary-bg: #27272a;
+  --color-button-secondary-fg: #f4f4f5;
+  --color-button-secondary-hover: #3f3f46;
+  --color-button-ghost-fg: #fafafa;
+  --color-button-ghost-hover: #18181b;
+  --color-button-link-fg: #f4f4f5;
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;

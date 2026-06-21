@@ -28,9 +28,13 @@ export function Navbar() {
         </div>
 
         <div className="text-content-muted ml-auto flex shrink-0 items-center gap-8 text-base font-medium">
-          <span className="cursor-default select-none" aria-label={`${NAV.PRICING} (coming soon)`}>
+          <Link
+            href="/#pricing"
+            className="hover:text-content transition-colors"
+            aria-label={`${NAV.PRICING} — jump to section`}
+          >
             {NAV.PRICING}
-          </span>
+          </Link>
           <span className="cursor-default select-none" aria-label={`${NAV.LOGIN} (coming soon)`}>
             {NAV.LOGIN}
           </span>
