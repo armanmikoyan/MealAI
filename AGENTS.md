@@ -23,7 +23,7 @@ ESLint enforces **kebab-case** folders under `app/components/` (`check-file/fold
 
 Feature folders live under **`app/components/<kebab-case-name>/`**. Typical layout:
 
-- **`constants.ts`** — user-visible copy: **UPPERCASE** export names and **SCREAMING_SNAKE_CASE** keys (`as const`).
+- **`constants.ts`** — user-visible copy, plus **any static arrays/objects you `.map()` over** for that feature (row models, class strings, decor layout, etc.): **UPPERCASE** export names and **SCREAMING_SNAKE_CASE** keys (`as const`). Do not put JSX in `constants.ts` (`.ts` only); use ids + render branches in TSX when children are components.
 - **`index.tsx`** — main feature UI (default export). **`app/<route>/page.tsx`** defines a **`Page`** component that renders it (e.g. `return <Feature />`), not a bare re-export of the feature default.
 - **`state.ts`** — **Jotai** atoms and related client state (single file, not a folder).
 - **`utils.ts`** — pure helpers, no Jotai (single file, not a folder).

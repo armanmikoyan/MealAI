@@ -2,6 +2,8 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+@import './components/hero/style.css';
+
 @custom-variant dark (&:is(.dark *));
 
 /* App palette + fonts. Geist vars come from next/font on <html>. */

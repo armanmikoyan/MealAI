@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
+import Hero from '@/app/components/hero';
 
 export default function Page(): ReactNode {
-  return <div className="mt-50">Hello World</div>;
+  return <Hero />;
 }
