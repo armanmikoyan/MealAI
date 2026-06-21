@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { Navbar } from '@/app/components/nav-bar';
 import { Providers } from '@/app/providers';
 
 type RootLayoutProps = Readonly<{
@@ -19,15 +20,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Mealai',
+  title: 'MealAI',
   description: 'Meal planning',
+  icons: {
+    icon: [{ url: '/icons/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
+  },
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <Navbar />
+        <main className="flex min-h-0 flex-1 flex-col">
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );
