@@ -1,14 +1,8 @@
 import { cn } from '@/lib/utils';
-import {
-  HERO_ENTER_GRID_SHELL,
-  HERO_ENTER_MOTION_REDUCE,
-  HERO_ENTER_SHELL_BLOCKS,
-} from './constants';
-import { HeroBetweenCardsArrow } from './hero-between-cards-arrow';
+import { HERO_ENTER_MOTION_REDUCE, HERO_ENTER_SHELL_BLOCKS } from './constants';
 import { HeroCta } from './hero-cta';
 import { HeroIntroTypewriter } from './hero-intro-typewriter';
-import HeroResultReadout from './hero-result-readout';
-import HeroUploadColumn from './hero-upload-column';
+import { HeroMealStage } from './hero-meal-stage';
 
 export default function Hero() {
   return (
@@ -25,15 +19,7 @@ export default function Hero() {
                 <HeroCta />
               </>
             ) : (
-              <div className={HERO_ENTER_GRID_SHELL}>
-                <div className="relative z-0 flex h-full min-h-0 w-full min-w-0 lg:min-w-0">
-                  <HeroUploadColumn />
-                </div>
-                <HeroBetweenCardsArrow />
-                <div className="relative z-0 flex h-full min-h-0 w-full min-w-0">
-                  <HeroResultReadout />
-                </div>
-              </div>
+              <HeroMealStage />
             )}
           </div>
         ))}

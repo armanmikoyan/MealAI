@@ -1,9 +1,12 @@
+'use client';
+
 import { Card, CardContent } from '@/app/ui/card';
+import { NumberTicker } from '@/app/ui/number-ticker';
 import { cn } from '@/lib/utils';
 
-import type { HeroNutrientTileRowModel } from './constants';
+import type { HeroStatTileModel } from './constants';
 
-export type HeroNutrientTileProps = HeroNutrientTileRowModel;
+export type HeroNutrientTileProps = HeroStatTileModel;
 
 export function HeroNutrientTile({
   ICON,
@@ -29,7 +32,7 @@ export function HeroNutrientTile({
             {LABEL}
           </p>
           <p className="font-heading text-sm font-semibold tracking-tight tabular-nums sm:text-base">
-            {VALUE}
+            <NumberTicker value={Number(VALUE)} />
             <span className="text-muted-foreground font-sans text-[10px] font-normal sm:text-xs">
               {' '}
               {UNIT}

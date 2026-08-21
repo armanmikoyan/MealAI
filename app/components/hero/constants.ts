@@ -6,7 +6,11 @@ import {
   Candy,
   Donut,
   Droplet,
+  Drumstick,
+  Fish,
+  Flame,
   LeafyGreen,
+  Salad,
   Sprout,
   Wheat,
 } from 'lucide-react';
@@ -17,69 +21,88 @@ export type HeroMockMealChipRow = Readonly<{
   TEXT: string;
 }>;
 
-export type HeroNutrientTileRowModel = Readonly<{
+export type HeroNutrientMetricKey =
+  | 'PROTEIN'
+  | 'CARBS'
+  | 'FAT'
+  | 'FIBER'
+  | 'SAT_FAT'
+  | 'SUGAR'
+  | 'SODIUM'
+  | 'POTASSIUM';
+
+export type HeroMealMacros = Readonly<Record<HeroNutrientMetricKey, string>>;
+
+export type HeroStatTileChrome = Readonly<{
   ICON: LucideIcon;
   LABEL: string;
-  VALUE: string;
   UNIT: string;
   ICON_CLASS: string;
   ICON_BG_CLASS: string;
+}>;
+
+export type HeroNutrientMetricRow = HeroStatTileChrome &
+  Readonly<{
+    KEY: HeroNutrientMetricKey;
+  }>;
+
+export type HeroStatTileModel = HeroStatTileChrome &
+  Readonly<{
+    VALUE: string;
+  }>;
+
+export type HeroNutrientTileRowModel = HeroNutrientMetricRow &
+  Readonly<{
+    VALUE: string;
+  }>;
+
+export type HeroMealSlide = Readonly<{
+  KEY: string;
+  IMAGE_SRC: string;
+  IMAGE_ALT: string;
+  NAME: string;
+  CHIPS: readonly HeroMockMealChipRow[];
+  CALORIES: string;
+  MACROS: HeroMealMacros;
 }>;
 
 export const HERO = {
   HEADING: 'Meal planning that respects your calories and your time.',
   SUBHEAD:
     "Upload a shot of your food, see today's calories and macros in seconds, and adjust the rest of your day—without manual logging.",
-  UPLOAD_HINT: 'Opens Snap a plate',
-  UPLOAD_IMAGE_SRC: '/images/hero-meal.png',
-  UPLOAD_IMAGE_ALT: 'Grilled steak with asparagus, peppers, and tomatoes on a dark plate',
-  UPLOAD_SELECTED_BADGE: 'Selected',
   UPLOAD_IMAGE_SIZES: '(max-width: 1024px) 92vw, 46vw',
   CTA: 'Snap a plate',
   CTA_HREF: '/snap',
   CTA_HINT: 'One photo. The numbers land in seconds.',
-  RESULT_BADGE: 'Today · sample readout',
-  RESULT_TITLE: 'What you get from that upload',
-  RESULT_LEDE:
-    'A same-day view of this plate: name the steak, surface the numbers, and see how it fits what you still have planned for today.',
   MOCK_MEAL_LINE: 'Detected meal',
-  MOCK_MEAL_NAME: 'Grilled steak plate',
   MOCK_CONFIDENCE: 'High confidence',
-  CHIP_LEAFY: 'Asparagus',
-  CHIP_STARCH: 'Grilled veg',
-  CHIP_PROTEIN: 'Steak',
   NUTRIENTS_SECTION_LABEL: 'Nutrition breakdown',
   NUTRIENTS_SCOPE_NOTE: 'Estimated from your upload (demo numbers).',
   CALORIES_STAT_LABEL: 'Calories',
-  CALORIES_VALUE: '740',
   CALORIES_UNIT: 'kcal',
   PROTEIN_STAT_LABEL: 'Protein',
-  PROTEIN_VALUE: '52',
   PROTEIN_UNIT: 'g',
   CARBS_STAT_LABEL: 'Carbs',
-  CARBS_VALUE: '18',
   CARBS_UNIT: 'g',
   FAT_STAT_LABEL: 'Fat',
-  FAT_VALUE: '46',
   FAT_UNIT: 'g',
   FIBER_STAT_LABEL: 'Fiber',
-  FIBER_VALUE: '6',
   FIBER_UNIT: 'g',
   SAT_FAT_LABEL: 'Sat. fat',
-  SAT_FAT_VALUE: '16',
   SAT_FAT_UNIT: 'g',
   SUGAR_LABEL: 'Sugar',
-  SUGAR_VALUE: '8',
   SUGAR_UNIT: 'g',
   SODIUM_LABEL: 'Sodium',
-  SODIUM_VALUE: '520',
   SODIUM_UNIT: 'mg',
   POTASSIUM_LABEL: 'Potassium',
-  POTASSIUM_VALUE: '980',
   POTASSIUM_UNIT: 'mg',
-  CALORIES_FEATURE_CAPTION:
-    'Macros and more stack in the tiles below—the same readout pattern in the app.',
 } as const;
+
+export const HERO_MEAL_ROTATE_MS = 15000 as const;
+export const HERO_MEAL_PHOTO_CROSSFADE_S = 0.8 as const;
+export const HERO_MEAL_KEN_BURNS_FROM = 1.06 as const;
+export const HERO_MEAL_KEN_BURNS_TO = 1.18 as const;
+export const HERO_MEAL_COPY_SWAP_S = 0.45 as const;
 
 /** Append next to tw-animate `animate-in` for `prefers-reduced-motion`. */
 export const HERO_ENTER_MOTION_REDUCE =
@@ -139,87 +162,168 @@ export const HERO_ENTER_SHELL_BLOCKS = [
   },
 ] as const;
 
-export const HERO_MOCK_MEAL_CHIP_ROWS: readonly HeroMockMealChipRow[] = [
-  {
-    ICON: Beef,
-    ICON_CLASS: 'text-macro-protein/95 size-3.5',
-    TEXT: HERO.CHIP_PROTEIN,
-  },
-  {
-    ICON: LeafyGreen,
-    ICON_CLASS: 'size-3.5 text-positive/90',
-    TEXT: HERO.CHIP_LEAFY,
-  },
-  {
-    ICON: Wheat,
-    ICON_CLASS: 'text-content-muted/90 size-3.5',
-    TEXT: HERO.CHIP_STARCH,
-  },
-];
+export const HERO_CALORIES_TILE: HeroStatTileChrome = {
+  ICON: Flame,
+  LABEL: HERO.CALORIES_STAT_LABEL,
+  UNIT: HERO.CALORIES_UNIT,
+  ICON_CLASS: 'text-accent-mid',
+  ICON_BG_CLASS: 'bg-accent/18',
+};
 
-export const HERO_NUTRIENT_TILE_ROWS: readonly HeroNutrientTileRowModel[] = [
+export const HERO_NUTRIENT_METRIC_ROWS: readonly HeroNutrientMetricRow[] = [
   {
+    KEY: 'PROTEIN',
     ICON: Beef,
     LABEL: HERO.PROTEIN_STAT_LABEL,
-    VALUE: HERO.PROTEIN_VALUE,
     UNIT: HERO.PROTEIN_UNIT,
     ICON_CLASS: 'text-macro-protein/95',
     ICON_BG_CLASS: 'bg-macro-protein/12 ring-1 ring-macro-protein/15',
   },
   {
+    KEY: 'CARBS',
     ICON: Wheat,
     LABEL: HERO.CARBS_STAT_LABEL,
-    VALUE: HERO.CARBS_VALUE,
     UNIT: HERO.CARBS_UNIT,
     ICON_CLASS: 'text-accent-soft/90',
     ICON_BG_CLASS: 'bg-accent/10 ring-1 ring-accent/12',
   },
   {
+    KEY: 'FAT',
     ICON: Droplet,
     LABEL: HERO.FAT_STAT_LABEL,
-    VALUE: HERO.FAT_VALUE,
     UNIT: HERO.FAT_UNIT,
     ICON_CLASS: 'text-macro-fat/90',
     ICON_BG_CLASS: 'bg-macro-fat-strong/12 ring-1 ring-macro-fat-strong/15',
   },
   {
+    KEY: 'FIBER',
     ICON: Sprout,
     LABEL: HERO.FIBER_STAT_LABEL,
-    VALUE: HERO.FIBER_VALUE,
     UNIT: HERO.FIBER_UNIT,
     ICON_CLASS: 'text-positive/95',
     ICON_BG_CLASS: 'bg-positive/12 ring-1 ring-positive/15',
   },
   {
+    KEY: 'SAT_FAT',
     ICON: Donut,
     LABEL: HERO.SAT_FAT_LABEL,
-    VALUE: HERO.SAT_FAT_VALUE,
     UNIT: HERO.SAT_FAT_UNIT,
     ICON_CLASS: 'text-macro-sat/85',
     ICON_BG_CLASS: 'bg-macro-sat/10 ring-1 ring-macro-sat/12',
   },
   {
+    KEY: 'SUGAR',
     ICON: Candy,
     LABEL: HERO.SUGAR_LABEL,
-    VALUE: HERO.SUGAR_VALUE,
     UNIT: HERO.SUGAR_UNIT,
     ICON_CLASS: 'text-macro-sugar/90',
     ICON_BG_CLASS: 'bg-macro-sugar/10 ring-1 ring-macro-sugar/12',
   },
   {
+    KEY: 'SODIUM',
     ICON: Beaker,
     LABEL: HERO.SODIUM_LABEL,
-    VALUE: HERO.SODIUM_VALUE,
     UNIT: HERO.SODIUM_UNIT,
     ICON_CLASS: 'text-macro-sodium/90',
     ICON_BG_CLASS: 'bg-macro-sodium/12 ring-1 ring-macro-sodium/15',
   },
   {
+    KEY: 'POTASSIUM',
     ICON: Battery,
     LABEL: HERO.POTASSIUM_LABEL,
-    VALUE: HERO.POTASSIUM_VALUE,
     UNIT: HERO.POTASSIUM_UNIT,
     ICON_CLASS: 'text-macro-potassium/85',
     ICON_BG_CLASS: 'bg-macro-potassium/10 ring-1 ring-macro-potassium/12',
+  },
+];
+
+export const HERO_MEAL_SLIDES: readonly HeroMealSlide[] = [
+  {
+    KEY: 'steak',
+    IMAGE_SRC: '/images/hero-meal.png',
+    IMAGE_ALT: 'Grilled steak with asparagus, peppers, and tomatoes on a dark plate',
+    NAME: 'Grilled steak plate',
+    CHIPS: [
+      { ICON: Beef, ICON_CLASS: 'text-macro-protein/95', TEXT: 'Steak' },
+      { ICON: LeafyGreen, ICON_CLASS: 'text-positive/90', TEXT: 'Asparagus' },
+      { ICON: Wheat, ICON_CLASS: 'text-content-muted/90', TEXT: 'Grilled veg' },
+    ],
+    CALORIES: '740',
+    MACROS: {
+      PROTEIN: '52',
+      CARBS: '18',
+      FAT: '46',
+      FIBER: '6',
+      SAT_FAT: '16',
+      SUGAR: '8',
+      SODIUM: '520',
+      POTASSIUM: '980',
+    },
+  },
+  {
+    KEY: 'salad',
+    IMAGE_SRC: '/images/hero-salad.png',
+    IMAGE_ALT: 'Garden salad with cherry tomatoes, cucumber, and peppers in a grey bowl',
+    NAME: 'Garden salad bowl',
+    CHIPS: [
+      { ICON: Salad, ICON_CLASS: 'text-positive/90', TEXT: 'Greens' },
+      { ICON: LeafyGreen, ICON_CLASS: 'text-positive/80', TEXT: 'Cucumber' },
+      { ICON: Sprout, ICON_CLASS: 'text-macro-protein/80', TEXT: 'Tomato' },
+    ],
+    CALORIES: '220',
+    MACROS: {
+      PROTEIN: '8',
+      CARBS: '18',
+      FAT: '12',
+      FIBER: '7',
+      SAT_FAT: '2',
+      SUGAR: '9',
+      SODIUM: '280',
+      POTASSIUM: '720',
+    },
+  },
+  {
+    KEY: 'fish',
+    IMAGE_SRC: '/images/hero-fish.png',
+    IMAGE_ALT: 'Grilled salmon with mashed potatoes, asparagus, and roasted vegetables',
+    NAME: 'Salmon mash bowl',
+    CHIPS: [
+      { ICON: Fish, ICON_CLASS: 'text-macro-fat-strong/90', TEXT: 'Salmon' },
+      { ICON: LeafyGreen, ICON_CLASS: 'text-positive/90', TEXT: 'Asparagus' },
+      { ICON: Wheat, ICON_CLASS: 'text-accent-soft/90', TEXT: 'Sweet potato' },
+    ],
+    CALORIES: '620',
+    MACROS: {
+      PROTEIN: '38',
+      CARBS: '42',
+      FAT: '24',
+      FIBER: '8',
+      SAT_FAT: '5',
+      SUGAR: '9',
+      SODIUM: '480',
+      POTASSIUM: '890',
+    },
+  },
+  {
+    KEY: 'chicken',
+    IMAGE_SRC: '/images/hero-stake.png',
+    IMAGE_ALT: 'Grilled chicken quinoa bowl with avocado, greens, and yogurt sauce',
+    NAME: 'Chicken quinoa bowl',
+    CHIPS: [
+      { ICON: Drumstick, ICON_CLASS: 'text-macro-protein/95', TEXT: 'Chicken' },
+      { ICON: Wheat, ICON_CLASS: 'text-accent-soft/90', TEXT: 'Quinoa' },
+      { ICON: LeafyGreen, ICON_CLASS: 'text-positive/90', TEXT: 'Avocado' },
+    ],
+    CALORIES: '560',
+    MACROS: {
+      PROTEIN: '44',
+      CARBS: '38',
+      FAT: '22',
+      FIBER: '9',
+      SAT_FAT: '4',
+      SUGAR: '6',
+      SODIUM: '410',
+      POTASSIUM: '850',
+    },
   },
 ];
