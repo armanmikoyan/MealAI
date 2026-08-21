@@ -6,6 +6,23 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
+## Mindset
+
+1. **Think before acting.** Reason through the change before writing code.
+2. **Research, then implement.** Check installed Next.js docs and existing patterns here before inventing a new one. Training data loses when it conflicts with `package.json` versions or `node_modules/next/dist/docs/`.
+3. **Fix the root cause.** Do not stack workarounds on a broken foundation.
+4. **No breadcrumbs.** If you delete or move code, remove it cleanly. Do not leave `// moved to X` comments.
+5. **Leave the repo better.** Delete unused props, helpers, and imports. Prefer the simplest code that matches this file.
+6. **Do not pivot** unless the user asks or evidence requires it.
+
+## Skills
+
+- **Next.js APIs** (routing, RSC, metadata, images, fonts, errors): `.agents/skills/next-best-practices/SKILL.md`
+- **React / Next performance** (bundles, re-renders, hydration): `.agents/skills/vercel-react-best-practices/SKILL.md`
+- **shadcn / Base UI** (add, compose, or style components): `.agents/skills/shadcn/SKILL.md`
+- **UI / a11y / UX review**: `.agents/skills/web-design-guidelines/SKILL.md`
+- **Looking for another skill**: `.agents/skills/find-skills/SKILL.md`
+
 ## TypeScript
 
 Do not inline structural types in props or signatures (no `{ children: ReactNode }` or `Readonly<{ … }>` on the function). Declare a named `type` (or `interface`) and use that name.
