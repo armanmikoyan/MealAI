@@ -1,45 +1,58 @@
 import { ChevronDown } from 'lucide-react';
+import { useId } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { FAQ_DETAILS_GROUP_NAME, type FaqItemRow } from './constants';
+import type { FaqItemRow } from './constants';
 
 type FaqItemProps = Readonly<{
   item: FaqItemRow;
+  isOpen: boolean;
+  onToggle: () => void;
 }>;
 
-export function FaqItem({ item }: FaqItemProps) {
+export function FaqItem({ item, isOpen, onToggle }: FaqItemProps) {
+  const panelId = useId();
+  const triggerId = useId();
+
   return (
-    <details
-      name={FAQ_DETAILS_GROUP_NAME}
-      className="border-edge-strong bg-surface-raised/30 group select-none rounded-2xl border px-5 py-1 sm:px-6"
-    >
-      <summary
+    <div className="border-edge-strong bg-surface-raised/30 rounded-2xl border px-5 py-1 sm:px-6">
+      <button
+        type="button"
+        id={triggerId}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onClick={onToggle}
         className={cn(
-          'text-content flex cursor-pointer list-none items-center justify-between gap-3 py-4 text-left text-base font-medium tracking-tight sm:text-lg',
-          '[&::-webkit-details-marker]:hidden',
+          'text-content flex w-full cursor-pointer items-center justify-between gap-3 py-4 text-left text-base font-medium tracking-tight sm:text-lg',
+          'rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-edge-strong/45',
         )}
       >
         <span className="min-w-0">{item.QUESTION}</span>
         <ChevronDown
-          className="text-content-muted size-5 shrink-0 transition-transform duration-300 ease-out group-open:rotate-180 motion-reduce:duration-0"
+          className={cn(
+            'text-content-muted size-5 shrink-0 transition-transform duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:duration-0',
+            isOpen && 'rotate-180',
+          )}
           strokeWidth={1.75}
           aria-hidden
         />
-      </summary>
+      </button>
       <div
+        id={panelId}
+        role="region"
+        aria-labelledby={triggerId}
         className={cn(
-          'grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out',
-          'group-open:grid-rows-[1fr]',
-          'motion-reduce:transition-none',
+          'grid transition-[grid-template-rows] duration-[400ms] ease-[cubic-bezier(0.32,0.72,0,1)] motion-reduce:transition-none',
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         )}
       >
         <div className="min-h-0 overflow-hidden">
-          <p className="text-content-muted border-edge/60 select-text border-t pb-4 pt-3 text-sm leading-relaxed sm:text-[15px]">
+          <p className="text-content-muted border-edge/60 border-t pb-4 pt-3 text-sm leading-relaxed sm:text-[15px]">
             {item.ANSWER}
           </p>
         </div>
       </div>
-    </details>
+    </div>
   );
 }

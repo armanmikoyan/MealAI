@@ -29,7 +29,7 @@ function HeroUploadDecorRow({ glyphs, indexOffset }: HeroUploadDecorRowProps) {
 
 export default function HeroUploadColumn() {
   return (
-    <div className="grid h-full w-full min-w-0 grid-cols-1 items-stretch gap-y-3 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:gap-y-6 lg:py-6">
+    <div className="grid h-full w-full min-w-0 grid-cols-1 items-stretch gap-y-3 overflow-x-clip lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:gap-y-6 lg:py-6">
       <HeroUploadDecorRow glyphs={HERO_UPLOAD_DECOR_TOP} indexOffset={0} />
       <figure className="relative block min-h-0 w-full min-w-0 max-w-full self-stretch lg:row-start-2">
         <div

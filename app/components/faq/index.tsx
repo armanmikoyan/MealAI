@@ -1,7 +1,6 @@
 import { ScrollEnter } from '@/app/components/scroll';
 
-import { FAQ_ITEMS } from './constants';
-import { FaqItem } from './faq-item';
+import { FaqList } from './faq-list';
 import { FaqSectionIntro } from './faq-section-intro';
 
 export default function Faq() {
@@ -19,11 +18,7 @@ export default function Faq() {
             content: (
               <>
                 <FaqSectionIntro />
-                <div className="mx-auto mt-10 flex max-w-4xl flex-col gap-3 sm:mt-12 sm:gap-4">
-                  {FAQ_ITEMS.map((item) => (
-                    <FaqItem key={item.KEY} item={item} />
-                  ))}
-                </div>
+                <FaqList />
               </>
             ),
           },

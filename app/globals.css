@@ -69,6 +69,6 @@
 /* Shared horizontal bounds for marketing + nav (wider than the old 90rem cap). */
 @layer components {
   .layout-page-shell {
-    @apply mx-auto w-full max-w-[min(120rem,calc(100vw-2rem))] px-4 sm:px-6 lg:px-10;
+    @apply mx-auto w-full max-w-[120rem] px-4 sm:px-6 lg:px-10;
   }
 }

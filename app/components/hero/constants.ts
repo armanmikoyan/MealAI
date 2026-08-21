@@ -128,7 +128,7 @@ export type HeroIntroLineKey = (typeof HERO_INTRO_LINES)[number]['KEY'];
 
 /** Upload | arrow | result from `md` up; stacked on small screens. */
 export const HERO_ENTER_GRID_SHELL =
-  'relative grid min-w-0 grid-cols-1 gap-4 overflow-x-clip [&>*]:min-w-0 md:grid-cols-[minmax(0,1fr)_minmax(2.5rem,4rem)_minmax(0,1fr)] md:items-stretch md:gap-4' as const;
+  'relative grid min-w-0 grid-cols-1 gap-4 [&>*]:min-w-0 md:grid-cols-[minmax(0,1fr)_minmax(2.5rem,4rem)_minmax(0,1fr)] md:items-stretch md:gap-4' as const;
 
 export const HERO_ENTER_SHELL_BLOCKS = [
   {

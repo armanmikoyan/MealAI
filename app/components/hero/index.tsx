@@ -12,7 +12,7 @@ import HeroUploadColumn from './hero-upload-column';
 export default function Hero() {
   return (
     <section
-      className="hero-section border-edge/60 relative overflow-hidden border-b bg-canvas"
+      className="hero-section border-edge/60 relative overflow-x-clip border-b bg-canvas"
       aria-labelledby="hero-heading"
     >
       <div className="relative layout-page-shell py-8 sm:py-10 lg:py-12">
@@ -26,7 +26,7 @@ export default function Hero() {
                   <HeroUploadColumn />
                 </div>
                 <HeroBetweenCardsArrow />
-                <div className="relative z-0 h-full min-h-0 w-full min-w-0">
+                <div className="relative z-0 h-full min-h-0 w-full min-w-0 overflow-visible">
                   <HeroResultReadout />
                 </div>
               </div>

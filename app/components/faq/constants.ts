@@ -1,6 +1,3 @@
-/** Same `name` on each `<details>` = exclusive accordion (one open at a time) in supporting browsers. */
-export const FAQ_DETAILS_GROUP_NAME = 'mealai-faq' as const;
-
 export const FAQ_SECTION = {
   EYEBROW: 'FAQ',
   TITLE: 'Answers before you ask',

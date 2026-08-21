@@ -12,7 +12,7 @@ export default function HeroResultReadout() {
   return (
     <div
       className={cn(
-        '@container/result hero-enter border-edge-strong bg-surface-raised/40 animate-in fade-in slide-in-from-right-10 zoom-in-95 fill-mode-both relative flex h-full min-h-0 w-full min-w-0 max-w-full flex-col overflow-hidden rounded-2xl border p-4 delay-300 duration-1000 ease-out sm:p-5',
+        '@container/result hero-enter border-edge-strong bg-surface-raised/40 animate-in fade-in slide-in-from-right-10 zoom-in-95 fill-mode-both relative box-border flex h-full min-h-0 w-full min-w-0 max-w-full flex-col overflow-hidden rounded-2xl border p-4 delay-300 duration-1000 ease-out sm:p-5',
         HERO_ENTER_MOTION_REDUCE,
       )}
       role="region"
