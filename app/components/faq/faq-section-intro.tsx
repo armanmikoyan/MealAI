@@ -12,7 +12,7 @@ export function FaqSectionIntro() {
       >
         {FAQ_SECTION.TITLE}
       </h2>
-      <p className="text-content-muted mt-3 text-sm leading-relaxed sm:text-base">{FAQ_SECTION.SUBTITLE}</p>
+      <p className="text-content-muted mt-3 text-sm/relaxed sm:text-base">{FAQ_SECTION.SUBTITLE}</p>
     </div>
   );
 }

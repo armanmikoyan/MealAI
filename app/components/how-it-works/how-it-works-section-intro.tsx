@@ -12,7 +12,7 @@ export function HowItWorksSectionIntro() {
       >
         {HOW_IT_WORKS.TITLE}
       </h2>
-      <p className="text-content-muted mt-3 text-sm leading-relaxed sm:text-base">
+      <p className="text-content-muted mt-3 text-sm/relaxed sm:text-base">
         {HOW_IT_WORKS.SUBTITLE}
       </p>
     </div>

@@ -6,20 +6,10 @@ import {
   Candy,
   Donut,
   Droplet,
-  Fish,
-  Flame,
   LeafyGreen,
   Sprout,
   Wheat,
 } from 'lucide-react';
-
-export type HeroUploadDecorGlyph = Readonly<{
-  ICON: LucideIcon;
-  ICON_CLASS: string;
-  TOP: string;
-  LEFT: string;
-  ROTATE: string;
-}>;
 
 export type HeroMockMealChipRow = Readonly<{
   ICON: LucideIcon;
@@ -40,76 +30,83 @@ export const HERO = {
   HEADING: 'Meal planning that respects your calories and your time.',
   SUBHEAD:
     "Upload a shot of your food, see today's calories and macros in seconds, and adjust the rest of your day—without manual logging.",
-  UPLOAD_ARIA_LABEL: 'Upload area for your meal image before analysis.',
-  UPLOAD_DROP_TITLE: 'Upload your meal',
-  UPLOAD_DROP_BODY: 'Drag and drop or pick a file—MealAI reads the meal and fills in the numbers.',
-  UPLOAD_HINT: 'Files & gallery · coming soon',
+  UPLOAD_HINT: 'Opens Snap a plate',
+  UPLOAD_IMAGE_SRC: '/images/hero-meal.png',
+  UPLOAD_IMAGE_ALT: 'Grilled steak with asparagus, peppers, and tomatoes on a dark plate',
+  UPLOAD_SELECTED_BADGE: 'Selected',
+  UPLOAD_IMAGE_SIZES: '(max-width: 1024px) 92vw, 46vw',
+  CTA: 'Snap a plate',
+  CTA_HREF: '/snap',
+  CTA_HINT: 'One photo. The numbers land in seconds.',
   RESULT_BADGE: 'Today · sample readout',
   RESULT_TITLE: 'What you get from that upload',
   RESULT_LEDE:
-    'A same-day view: name the plate, surface the numbers, and see how this meal fits what you still have planned for today.',
+    'A same-day view of this plate: name the steak, surface the numbers, and see how it fits what you still have planned for today.',
   MOCK_MEAL_LINE: 'Detected meal',
-  MOCK_MEAL_NAME: 'Salmon rice bowl',
+  MOCK_MEAL_NAME: 'Grilled steak plate',
   MOCK_CONFIDENCE: 'High confidence',
-  CHIP_LEAFY: 'Greens',
-  CHIP_STARCH: 'Jasmine rice',
-  CHIP_PROTEIN: 'Salmon',
+  CHIP_LEAFY: 'Asparagus',
+  CHIP_STARCH: 'Grilled veg',
+  CHIP_PROTEIN: 'Steak',
   NUTRIENTS_SECTION_LABEL: 'Nutrition breakdown',
   NUTRIENTS_SCOPE_NOTE: 'Estimated from your upload (demo numbers).',
   CALORIES_STAT_LABEL: 'Calories',
-  CALORIES_VALUE: '620',
+  CALORIES_VALUE: '740',
   CALORIES_UNIT: 'kcal',
   PROTEIN_STAT_LABEL: 'Protein',
-  PROTEIN_VALUE: '38',
+  PROTEIN_VALUE: '52',
   PROTEIN_UNIT: 'g',
   CARBS_STAT_LABEL: 'Carbs',
-  CARBS_VALUE: '54',
+  CARBS_VALUE: '18',
   CARBS_UNIT: 'g',
   FAT_STAT_LABEL: 'Fat',
-  FAT_VALUE: '17',
+  FAT_VALUE: '46',
   FAT_UNIT: 'g',
   FIBER_STAT_LABEL: 'Fiber',
-  FIBER_VALUE: '5',
+  FIBER_VALUE: '6',
   FIBER_UNIT: 'g',
   SAT_FAT_LABEL: 'Sat. fat',
-  SAT_FAT_VALUE: '4',
+  SAT_FAT_VALUE: '16',
   SAT_FAT_UNIT: 'g',
   SUGAR_LABEL: 'Sugar',
-  SUGAR_VALUE: '6',
+  SUGAR_VALUE: '8',
   SUGAR_UNIT: 'g',
   SODIUM_LABEL: 'Sodium',
-  SODIUM_VALUE: '690',
+  SODIUM_VALUE: '520',
   SODIUM_UNIT: 'mg',
   POTASSIUM_LABEL: 'Potassium',
-  POTASSIUM_VALUE: '580',
+  POTASSIUM_VALUE: '980',
   POTASSIUM_UNIT: 'mg',
   CALORIES_FEATURE_CAPTION:
     'Macros and more stack in the tiles below—the same readout pattern in the app.',
 } as const;
 
-/** Append next to `hero-enter` + tw-animate `animate-in` for `prefers-reduced-motion`. */
+/** Append next to tw-animate `animate-in` for `prefers-reduced-motion`. */
 export const HERO_ENTER_MOTION_REDUCE =
-  'motion-reduce:!animate-none motion-reduce:!opacity-100 motion-reduce:!transform-none motion-reduce:!filter-none' as const;
-
-/** Append next to `.hero-aurora-blob` rows to stop blob drift when `prefers-reduced-motion` is set. */
-export const HERO_AURORA_MOTION_REDUCE = 'motion-reduce:!animate-none' as const;
+  'motion-reduce:animate-none! motion-reduce:opacity-100! motion-reduce:transform-none! motion-reduce:filter-none!' as const;
 
 /** Shared Tailwind for typewriter carets under reduced motion. */
 export const HERO_TYPEWRITER_CARET_REDUCE_CLASS =
-  'motion-reduce:!animate-none motion-reduce:!opacity-65' as const;
+  'motion-reduce:animate-none! motion-reduce:opacity-65!' as const;
 
 export const HERO_INTRO_TYPE_START_MS = 380 as const;
 
 /** Extra `|` marks after the blinking caret; staggered animation reads as a left→right sweep. */
-export const HERO_INTRO_CARET_ECHO_COUNT = 4 as const;
+export const HERO_INTRO_CARET_ECHO_DELAY_CLASS = [
+  'delay-0',
+  'delay-[110ms]',
+  'delay-[220ms]',
+  'delay-[330ms]',
+] as const;
 
 export const HERO_INTRO_LINES = [
   {
     KEY: 'h',
     EL: 'h1',
     ID: 'hero-heading',
-    SHELL: 'text-content font-heading text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl',
-    CARET: 'hero-typewriter-caret text-content-muted inline-block align-baseline font-light',
+    SHELL:
+      'text-content font-heading text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl',
+    CARET: 'animate-caret-blink text-content-muted inline-block align-baseline font-light',
     TEXT: HERO.HEADING,
     MS: 26,
   },
@@ -117,8 +114,8 @@ export const HERO_INTRO_LINES = [
     KEY: 's',
     EL: 'p',
     ID: undefined,
-    SHELL: 'text-content-muted mt-3 max-w-3xl text-base leading-relaxed sm:text-lg',
-    CARET: 'hero-typewriter-caret text-content-muted/80 inline-block align-baseline font-light',
+    SHELL: 'text-content-muted mt-3 max-w-3xl text-base/relaxed sm:text-lg',
+    CARET: 'animate-caret-blink text-content-muted/80 inline-block align-baseline font-light',
     TEXT: HERO.SUBHEAD,
     MS: 11,
   },
@@ -128,47 +125,26 @@ export type HeroIntroLineKey = (typeof HERO_INTRO_LINES)[number]['KEY'];
 
 /** Upload | arrow | result from `md` up; stacked on small screens. */
 export const HERO_ENTER_GRID_SHELL =
-  'relative grid min-w-0 grid-cols-1 gap-4 [&>*]:min-w-0 md:grid-cols-[minmax(0,1fr)_minmax(2.5rem,4rem)_minmax(0,1fr)] md:items-stretch md:gap-4' as const;
+  'relative grid w-full min-w-0 grid-cols-1 items-stretch gap-5 [&>*]:min-w-0 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-8' as const;
 
 export const HERO_ENTER_SHELL_BLOCKS = [
   {
     ID: 'intro',
-    SHELL:
-      'hero-enter animate-in fade-in fill-mode-both max-w-5xl duration-1000 ease-out',
+    SHELL: 'animate-in fade-in fill-mode-both max-w-5xl duration-1000 ease-out',
   },
   {
     ID: 'grid',
     SHELL:
-        'hero-enter animate-in fade-in fill-mode-both mt-8 max-lg:slide-in-from-bottom-4 space-y-2 delay-200 duration-700 ease-out sm:mt-10 sm:space-y-2.5 md:mt-10 md:space-y-2 lg:mt-10 lg:space-y-2',
+      'animate-in fade-in fill-mode-both mt-8 max-lg:slide-in-from-bottom-4 delay-200 duration-700 ease-out sm:mt-10 md:mt-10 lg:mt-10',
   },
 ] as const;
 
-export const HERO_AURORA_BLOB_CLASSNAMES = [
-  'hero-aurora-blob hero-aurora-blob--a bg-white/6 top-[-28%] left-[-18%] h-[min(88vw,580px)] w-[min(88vw,580px)]',
-  'hero-aurora-blob hero-aurora-blob--b bg-content-muted/9 bottom-[-32%] right-[-22%] h-[min(95vw,640px)] w-[min(95vw,640px)]',
-  'hero-aurora-blob hero-aurora-blob--c bg-content-subtle/7 top-[35%] left-[25%] h-[min(70vw,420px)] w-[min(70vw,420px)]',
-] as const;
-
-/** Scatter in the top grid row only (`TOP` / `LEFT` are % of that row, never the upload card). */
-export const HERO_UPLOAD_DECOR_TOP: readonly HeroUploadDecorGlyph[] = [
-  { ICON: LeafyGreen, ICON_CLASS: 'text-positive/90', TOP: '52%', LEFT: '10%', ROTATE: '-10deg' },
-  { ICON: Beef, ICON_CLASS: 'text-macro-protein/95', TOP: '38%', LEFT: '30%', ROTATE: '-7deg' },
-  { ICON: Donut, ICON_CLASS: 'text-macro-sat/85', TOP: '48%', LEFT: '50%', ROTATE: '9deg' },
-  { ICON: Beaker, ICON_CLASS: 'text-macro-sodium/90', TOP: '35%', LEFT: '70%', ROTATE: '-8deg' },
-  { ICON: Fish, ICON_CLASS: 'text-macro-fat-strong/90', TOP: '55%', LEFT: '90%', ROTATE: '11deg' },
-];
-
-/** Scatter in the bottom grid row only. */
-export const HERO_UPLOAD_DECOR_BOTTOM: readonly HeroUploadDecorGlyph[] = [
-  { ICON: Sprout, ICON_CLASS: 'text-positive/95', TOP: '54%', LEFT: '8%', ROTATE: '-5deg' },
-  { ICON: Droplet, ICON_CLASS: 'text-macro-fat/90', TOP: '42%', LEFT: '25%', ROTATE: '6deg' },
-  { ICON: Wheat, ICON_CLASS: 'text-accent-soft/90', TOP: '58%', LEFT: '42%', ROTATE: '-11deg' },
-  { ICON: Candy, ICON_CLASS: 'text-macro-sugar/90', TOP: '38%', LEFT: '58%', ROTATE: '7deg' },
-  { ICON: Flame, ICON_CLASS: 'text-accent-mid/95', TOP: '50%', LEFT: '75%', ROTATE: '12deg' },
-  { ICON: Battery, ICON_CLASS: 'text-macro-potassium/85', TOP: '46%', LEFT: '92%', ROTATE: '-6deg' },
-];
-
 export const HERO_MOCK_MEAL_CHIP_ROWS: readonly HeroMockMealChipRow[] = [
+  {
+    ICON: Beef,
+    ICON_CLASS: 'text-macro-protein/95 size-3.5',
+    TEXT: HERO.CHIP_PROTEIN,
+  },
   {
     ICON: LeafyGreen,
     ICON_CLASS: 'size-3.5 text-positive/90',
@@ -178,11 +154,6 @@ export const HERO_MOCK_MEAL_CHIP_ROWS: readonly HeroMockMealChipRow[] = [
     ICON: Wheat,
     ICON_CLASS: 'text-content-muted/90 size-3.5',
     TEXT: HERO.CHIP_STARCH,
-  },
-  {
-    ICON: Fish,
-    ICON_CLASS: 'text-macro-fat-strong/90 size-3.5',
-    TEXT: HERO.CHIP_PROTEIN,
   },
 ];
 

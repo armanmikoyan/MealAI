@@ -1,3 +1,5 @@
+import type { NavMainSectionLinkRow } from './types';
+
 /** Top nav — user-visible strings. */
 
 export const NAV = {
@@ -15,20 +17,14 @@ export const NAV = {
   MENU_HEADING: 'On this page',
 } as const;
 
-export type NavMainSectionLinkRow = Readonly<{
-  HREF: string;
-  LABEL: string;
-  SECTION_ID: string;
-}>;
-
 /** Order matches page flow — used for scroll-spy (last section whose top is above the trigger wins). */
 export const NAV_MAIN_SECTION_LINKS: readonly NavMainSectionLinkRow[] = [
-  { SECTION_ID: 'how-it-works', HREF: '#how-it-works', LABEL: NAV.HOW_IT_WORKS },
-  { SECTION_ID: 'features', HREF: '#features', LABEL: NAV.FEATURES },
-  { SECTION_ID: 'use-cases', HREF: '#use-cases', LABEL: NAV.USE_CASES },
-  { SECTION_ID: 'feedback', HREF: '#feedback', LABEL: NAV.FEEDBACK },
-  { SECTION_ID: 'pricing', HREF: '#pricing', LABEL: NAV.PRICING },
-  { SECTION_ID: 'faq', HREF: '#faq', LABEL: NAV.FAQ },
+  { SECTION_ID: 'how-it-works', HREF: '/#how-it-works', LABEL: NAV.HOW_IT_WORKS },
+  { SECTION_ID: 'features', HREF: '/#features', LABEL: NAV.FEATURES },
+  { SECTION_ID: 'use-cases', HREF: '/#use-cases', LABEL: NAV.USE_CASES },
+  { SECTION_ID: 'feedback', HREF: '/#feedback', LABEL: NAV.FEEDBACK },
+  { SECTION_ID: 'pricing', HREF: '/#pricing', LABEL: NAV.PRICING },
+  { SECTION_ID: 'faq', HREF: '/#faq', LABEL: NAV.FAQ },
 ] as const;
 
 /** Sticky header height (`h-20`) — top band used for scroll-spy (viewport px). */

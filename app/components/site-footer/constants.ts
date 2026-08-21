@@ -2,7 +2,8 @@ export const SITE_FOOTER_MAIN = {
   BRAND: 'MealAi',
   TAGLINE: 'Photo-first logging that keeps pace with your day.',
   SUBLINE: 'Estimates, day context, and lists—without living in a spreadsheet.',
-  CTA_LINE: 'Public accounts are on the way. Until then, this page is a living preview of the product.',
+  CTA_LINE:
+    'Public accounts are on the way. Until then, this page is a living preview of the product.',
   COPYRIGHT: '© 2026 MealAi. All rights reserved.',
   LEGAL_NOTE:
     'Nutrition and health information is for general wellness only and is not medical advice. Consult a clinician for personal guidance.',
@@ -12,6 +13,7 @@ export const SITE_FOOTER_COLUMNS = {
   PRODUCT_HEADING: 'Product',
   COMPANY_HEADING: 'Company',
   CONNECT_HEADING: 'Connect',
+  SOON: 'soon',
 } as const;
 
 export type SiteFooterProductLinkRow = Readonly<{
@@ -21,6 +23,7 @@ export type SiteFooterProductLinkRow = Readonly<{
 }>;
 
 export const SITE_FOOTER_PRODUCT_LINKS: readonly SiteFooterProductLinkRow[] = [
+  { KEY: 'snap', LABEL: 'Snap a plate', HREF: '/snap' },
   { KEY: 'how', LABEL: 'How it works', HREF: '/#how-it-works' },
   { KEY: 'features', LABEL: 'Features', HREF: '/#features' },
   { KEY: 'use-cases', LABEL: 'Use cases', HREF: '/#use-cases' },

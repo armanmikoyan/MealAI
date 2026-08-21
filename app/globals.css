@@ -1,9 +1,8 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-
-@import './components/feedback-marquee/style.css';
-@import './components/hero/style.css';
+@import './ui/shimmer-button.css';
+@import './ui/marquee.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -24,6 +23,9 @@
   --color-accent: #fbbf24;
   --color-accent-soft: #fde68a;
   --color-accent-mid: #fcd34d;
+  --color-cta: #f0c400;
+  --color-cta-soft: #ffe566;
+  --color-cta-deep: #d4a800;
   --color-macro-protein: #fb7185;
   --color-macro-fat: #7dd3fc;
   --color-macro-fat-strong: #38bdf8;
@@ -46,6 +48,23 @@
   --color-button-ghost-hover: #18181b;
   --color-button-link-fg: #f4f4f5;
 
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-content);
+  --color-card: var(--color-surface-raised);
+  --color-card-foreground: var(--color-content);
+  --color-popover: var(--color-surface-raised);
+  --color-popover-foreground: var(--color-content);
+  --color-primary: var(--color-button-default-bg);
+  --color-primary-foreground: var(--color-button-default-fg);
+  --color-secondary: var(--color-button-secondary-bg);
+  --color-secondary-foreground: var(--color-button-secondary-fg);
+  --color-muted: var(--color-surface-overlay);
+  --color-muted-foreground: var(--color-content-muted);
+  --color-border: var(--color-edge-strong);
+  --color-input: var(--color-edge);
+  --color-ring: var(--color-edge-strong);
+  --color-destructive: var(--color-danger);
+
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
@@ -55,6 +74,17 @@
 @layer base {
   * {
     @apply border-edge outline-edge-strong/50;
+  }
+
+  a[href],
+  button:enabled,
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
   }
 
   body {

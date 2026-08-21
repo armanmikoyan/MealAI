@@ -1,11 +1,16 @@
+import { Badge } from '@/app/ui/badge';
+
 type FeedbackMarqueeQuoteChipProps = Readonly<{
   quote: string;
 }>;
 
 export function FeedbackMarqueeQuoteChip({ quote }: FeedbackMarqueeQuoteChipProps) {
   return (
-    <span className="border-edge-strong bg-surface-raised/50 text-content-muted inline-flex max-w-[min(22rem,85vw)] shrink-0 items-center rounded-full border px-4 py-2 text-sm leading-snug">
+    <Badge
+      variant="outline"
+      className="h-auto max-w-[min(22rem,85vw)] min-w-0 justify-start whitespace-normal px-4 py-2 text-left text-sm/snug"
+    >
       {quote}
-    </span>
+    </Badge>
   );
 }

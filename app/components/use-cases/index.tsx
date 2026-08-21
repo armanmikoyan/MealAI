@@ -23,7 +23,6 @@ export default function UseCases() {
                   {USE_CASE_CARD_ROWS.map((row) => (
                     <IconTextCard
                       key={row.KEY}
-                      as="article"
                       body={row.BODY}
                       icon={row.ICON}
                       iconShell={row.ICON_SHELL}

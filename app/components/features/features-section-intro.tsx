@@ -12,7 +12,7 @@ export function FeaturesSectionIntro() {
       >
         {FEATURES_SECTION.TITLE}
       </h2>
-      <p className="text-content-muted mt-3 text-sm leading-relaxed sm:text-base">
+      <p className="text-content-muted mt-3 text-sm/relaxed sm:text-base">
         {FEATURES_SECTION.SUBTITLE}
       </p>
     </div>

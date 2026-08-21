@@ -1,12 +1,11 @@
 'use client';
 
-import type { CSSProperties } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 import {
   type HeroIntroLineKey,
-  HERO_INTRO_CARET_ECHO_COUNT,
+  HERO_INTRO_CARET_ECHO_DELAY_CLASS,
   HERO_INTRO_LINES,
   HERO_INTRO_TYPE_START_MS,
   HERO_TYPEWRITER_CARET_REDUCE_CLASS,
@@ -23,7 +22,7 @@ export function HeroIntroTypewriter() {
       queueMicrotask(() => {
         setMotionReduced(true);
         setLens(
-          Object.fromEntries(HERO_INTRO_LINES.map(l => [l.KEY, l.TEXT.length])) as Record<
+          Object.fromEntries(HERO_INTRO_LINES.map((l) => [l.KEY, l.TEXT.length])) as Record<
             HeroIntroLineKey,
             number
           >,
@@ -46,7 +45,7 @@ export function HeroIntroTypewriter() {
       const step = () => {
         if (i < TEXT.length) {
           i += 1;
-          setLens(prev => ({ ...prev, [KEY]: i }));
+          setLens((prev) => ({ ...prev, [KEY]: i }));
           schedule(step, MS);
         }
       };
@@ -68,20 +67,17 @@ export function HeroIntroTypewriter() {
               <span className="col-start-1 row-start-1">
                 {TEXT.slice(0, len)}
                 {showCaret ? (
-                  <span
-                    className="hero-typewriter-carets ml-0.5 inline-flex select-none items-baseline"
-                    aria-hidden
-                  >
+                  <span className="ml-0.5 inline-flex select-none items-baseline" aria-hidden>
                     <span className={cn(CARET, HERO_TYPEWRITER_CARET_REDUCE_CLASS)}>|</span>
-                    {Array.from({ length: HERO_INTRO_CARET_ECHO_COUNT }, (_, echoIndex) => (
+                    {HERO_INTRO_CARET_ECHO_DELAY_CLASS.map((delayClass, echoIndex) => (
                       <span
                         key={echoIndex}
-                        className="hero-typewriter-caret-echo text-content-muted/50 inline-block align-baseline font-light"
-                        style={
-                          {
-                            '--hero-caret-trail-i': echoIndex,
-                          } as CSSProperties
-                        }
+                        className={cn(
+                          'text-content-muted/50 ms-[-0.07em] inline-block align-baseline font-light',
+                          'animate-pulse',
+                          'motion-reduce:animate-none motion-reduce:opacity-[0.28]',
+                          delayClass,
+                        )}
                       >
                         |
                       </span>

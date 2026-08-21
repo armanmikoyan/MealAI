@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/app/components/nav-bar';
-import { Providers } from '@/app/providers';
 
 type RootLayoutProps = Readonly<{
   children: ReactNode;
@@ -35,9 +34,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body className="flex min-h-full flex-col font-sans" suppressHydrationWarning>
         <Navbar />
-        <main className="flex min-h-0 flex-1 flex-col">
-          <Providers>{children}</Providers>
-        </main>
+        <main className="flex min-h-0 flex-1 flex-col">{children}</main>
       </body>
     </html>
   );

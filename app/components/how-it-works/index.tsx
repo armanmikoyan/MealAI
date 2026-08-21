@@ -20,16 +20,15 @@ export default function HowItWorks() {
                 <HowItWorksSectionIntro />
                 <ol className="mt-10 grid list-none grid-cols-1 gap-4 sm:mt-12 sm:gap-5 lg:grid-cols-3 lg:gap-6">
                   {HOW_IT_WORKS_STEPS.map((step) => (
-                    <IconTextCard
-                      key={step.KEY}
-                      as="li"
-                      body={step.BODY}
-                      className="min-w-0"
-                      icon={step.ICON}
-                      iconShell={step.ICON_SHELL}
-                      layout="horizontal"
-                      title={step.TITLE}
-                    />
+                    <li key={step.KEY} className="min-w-0">
+                      <IconTextCard
+                        body={step.BODY}
+                        icon={step.ICON}
+                        iconShell={step.ICON_SHELL}
+                        layout="horizontal"
+                        title={step.TITLE}
+                      />
+                    </li>
                   ))}
                 </ol>
               </>
