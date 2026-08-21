@@ -1,4 +1,4 @@
-import { Activity, Mail } from 'lucide-react';
+import { Activity, FolderGit2, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 import { Badge } from '@/app/ui/badge';
@@ -116,16 +116,30 @@ export default function SiteFooter() {
               <p className="text-muted-foreground mt-4 text-sm/relaxed">
                 {SITE_FOOTER_CONNECT.BLURB}
               </p>
-              <Button
-                className="mt-5 h-auto px-0"
-                nativeButton={false}
-                render={<a href={SITE_FOOTER_CONNECT.EMAIL_HREF} />}
-                size="sm"
-                variant="link"
-              >
-                <Mail data-icon="inline-start" />
-                {SITE_FOOTER_CONNECT.EMAIL_LABEL}
-              </Button>
+              <div className="mt-5 flex flex-col items-start gap-1">
+                <Button
+                  className="h-auto px-0"
+                  nativeButton={false}
+                  render={<a href={SITE_FOOTER_CONNECT.EMAIL_HREF} />}
+                  size="sm"
+                  variant="link"
+                >
+                  <Mail data-icon="inline-start" />
+                  {SITE_FOOTER_CONNECT.EMAIL_LABEL}
+                </Button>
+                <Button
+                  className="h-auto px-0"
+                  nativeButton={false}
+                  render={
+                    <a href={SITE_FOOTER_CONNECT.GITHUB_HREF} rel="noreferrer" target="_blank" />
+                  }
+                  size="sm"
+                  variant="link"
+                >
+                  <FolderGit2 data-icon="inline-start" />
+                  {SITE_FOOTER_CONNECT.GITHUB_LABEL}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
