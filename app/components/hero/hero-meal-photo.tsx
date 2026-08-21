@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
 
@@ -20,6 +20,8 @@ type HeroMealPhotoProps = Readonly<{
   showCycleProgress?: boolean;
 }>;
 
+let isFirstHeroMealPhotoMount = true;
+
 export function HeroMealPhoto({
   meal,
   sizes,
@@ -28,17 +30,19 @@ export function HeroMealPhoto({
   showCycleProgress = false,
 }: HeroMealPhotoProps) {
   const reduceMotion = useReducedMotion();
-  const isFirstMountRef = useRef(true);
-  const skipEnterFade = isFirstMountRef.current;
+  const [skipEnterFade] = useState(() => {
+    if (!isFirstHeroMealPhotoMount) {
+      return false;
+    }
+
+    isFirstHeroMealPhotoMount = false;
+    return true;
+  });
   const rotateS = HERO_MEAL_ROTATE_MS / 1000;
   const crossfade = {
     duration: reduceMotion ? 0.2 : HERO_MEAL_PHOTO_CROSSFADE_S,
     ease: [0.22, 1, 0.36, 1] as const,
   };
-
-  useEffect(() => {
-    isFirstMountRef.current = false;
-  }, []);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { SNAP } from './constants';
+import { SnapSubtitle } from './snap-subtitle';
 import { SnapUploadPanel } from './snap-upload-panel';
 
 export default function Snap() {
@@ -9,9 +10,7 @@ export default function Snap() {
           <h1 className="text-content font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
             {SNAP.TITLE}
           </h1>
-          <p className="text-content-muted mt-3 max-w-2xl text-base/relaxed sm:text-lg">
-            {SNAP.SUBTITLE}
-          </p>
+          <SnapSubtitle />
         </header>
 
         <div className="mt-8 flex min-h-0 flex-1 flex-col md:mt-10">
