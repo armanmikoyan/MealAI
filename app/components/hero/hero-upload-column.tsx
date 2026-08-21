@@ -17,7 +17,7 @@ export default function HeroUploadColumn({ meal }: HeroUploadColumnProps) {
     <Link
       href={HERO.CTA_HREF}
       className={cn(
-        'animate-in fade-in slide-in-from-left-10 zoom-in-95 fill-mode-both flex h-full min-h-72 w-full delay-200 duration-1000 ease-out sm:min-h-80',
+        'animate-in fade-in slide-in-from-left-10 zoom-in-95 fill-mode-both flex h-72 w-full delay-200 duration-1000 ease-out sm:h-80 lg:h-[32rem]',
         HERO_ENTER_MOTION_REDUCE,
       )}
       aria-label={HERO.CTA}

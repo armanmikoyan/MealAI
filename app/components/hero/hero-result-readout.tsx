@@ -25,13 +25,13 @@ export default function HeroResultReadout({ meal }: HeroResultReadoutProps) {
   return (
     <Card
       className={cn(
-        '@container/result animate-in fade-in slide-in-from-right-10 zoom-in-95 fill-mode-both flex h-full min-h-0 w-full flex-col delay-300 duration-1000 ease-out',
+        '@container/result animate-in fade-in slide-in-from-right-10 zoom-in-95 fill-mode-both flex w-full flex-col delay-300 duration-1000 ease-out',
         HERO_ENTER_MOTION_REDUCE,
       )}
       role="region"
       aria-labelledby="hero-result-title"
     >
-      <CardContent className="flex min-h-0 flex-1 flex-col gap-3 sm:gap-4">
+      <CardContent className="flex flex-col gap-3 sm:gap-4">
         <Card size="sm">
           <CardHeader>
             <div className="flex min-w-0 items-start gap-3">

@@ -25,11 +25,11 @@ export function HeroMealStage() {
 
   return (
     <div className={HERO_ENTER_GRID_SHELL}>
-      <div className="relative z-0 flex h-full min-h-0 w-full min-w-0">
+      <div className="relative z-0 flex w-full min-w-0 lg:self-start">
         <HeroUploadColumn meal={meal} />
       </div>
       <HeroBetweenCardsArrow />
-      <div className="relative z-0 flex h-full min-h-0 w-full min-w-0">
+      <div className="relative z-0 flex w-full min-w-0">
         <HeroResultReadout meal={meal} />
       </div>
     </div>
