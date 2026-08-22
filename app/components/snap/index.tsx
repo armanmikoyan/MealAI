@@ -12,7 +12,6 @@ export default function Snap() {
           </h1>
           <SnapSubtitle />
         </header>
-
         <div className="mt-8 flex min-h-0 flex-1 flex-col md:mt-10">
           <SnapUploadPanel />
         </div>
