@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
 
@@ -20,8 +19,6 @@ type HeroMealPhotoProps = Readonly<{
   showCycleProgress?: boolean;
 }>;
 
-let isFirstHeroMealPhotoMount = true;
-
 export function HeroMealPhoto({
   meal,
   sizes,
@@ -30,58 +27,27 @@ export function HeroMealPhoto({
   showCycleProgress = false,
 }: HeroMealPhotoProps) {
   const reduceMotion = useReducedMotion();
-  const [skipEnterFade] = useState(() => {
-    if (!isFirstHeroMealPhotoMount) {
-      return false;
-    }
-
-    isFirstHeroMealPhotoMount = false;
-    return true;
-  });
   const rotateS = HERO_MEAL_ROTATE_MS / 1000;
   const crossfade = {
     duration: reduceMotion ? 0.2 : HERO_MEAL_PHOTO_CROSSFADE_S,
     ease: [0.22, 1, 0.36, 1] as const,
   };
+  const scaleFrom = kenBurns ? HERO_MEAL_KEN_BURNS_FROM : 1;
+  const scaleTo = kenBurns ? HERO_MEAL_KEN_BURNS_TO : 1;
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         <motion.div
           key={meal.KEY}
           className="absolute inset-0"
-          initial={
-            reduceMotion
-              ? { opacity: skipEnterFade ? 1 : 0 }
-              : skipEnterFade
-                ? {
-                    opacity: 1,
-                    scale: kenBurns ? HERO_MEAL_KEN_BURNS_FROM : 1,
-                    filter: 'blur(0px)',
-                  }
-                : {
-                    opacity: 0,
-                    scale: kenBurns ? HERO_MEAL_KEN_BURNS_FROM : 1,
-                    filter: 'blur(16px)',
-                  }
-          }
-          animate={
-            reduceMotion
-              ? { opacity: 1 }
-              : kenBurns
-                ? { opacity: 1, scale: HERO_MEAL_KEN_BURNS_TO, filter: 'blur(0px)' }
-                : { opacity: 1, scale: 1, filter: 'blur(0px)' }
-          }
-          exit={
-            reduceMotion
-              ? { opacity: 0 }
-              : {
-                  opacity: 0,
-                  scale: kenBurns ? HERO_MEAL_KEN_BURNS_TO : 1.05,
-                  filter: 'blur(12px)',
-                  transition: crossfade,
-                }
-          }
+          initial={{ opacity: 0, filter: 'blur(16px)', scale: scaleFrom }}
+          animate={{ opacity: 1, filter: 'blur(0px)', scale: scaleTo }}
+          exit={{
+            opacity: 0,
+            filter: 'blur(12px)',
+            scale: kenBurns ? HERO_MEAL_KEN_BURNS_TO : 1.05,
+          }}
           transition={
             reduceMotion || !kenBurns
               ? crossfade
