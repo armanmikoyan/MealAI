@@ -80,7 +80,7 @@ export default function HeroResultReadout({ meal }: HeroResultReadoutProps) {
             </p>
           </div>
 
-          <div className="grid min-w-0 grid-cols-2 gap-1.5 [&>*]:min-w-0 md:gap-2 @xl/result:grid-cols-4">
+          <div className="grid min-w-0 grid-cols-2 gap-1.5 *:min-w-0 md:gap-2 @xl/result:grid-cols-4">
             <div className="col-span-2 @xl/result:col-span-4">
               <HeroNutrientTile {...caloriesTile} />
             </div>

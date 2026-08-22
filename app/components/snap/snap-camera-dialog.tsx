@@ -94,7 +94,7 @@ export function SnapCameraDialog({
               mirrored={facing === SNAP_CAMERA_FRONT}
               videoConstraints={{ facingMode: { ideal: facing } }}
               onUserMediaError={() => setError(SNAP.ERROR_CAMERA)}
-              className="bg-muted aspect-[3/4] w-full rounded-lg object-cover"
+              className="bg-muted aspect-3/4 w-full rounded-lg object-cover"
               aria-label={SNAP.CAMERA_VIDEO_LABEL}
             />
           ) : null}
