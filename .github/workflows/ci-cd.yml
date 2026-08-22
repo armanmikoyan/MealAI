@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DOCKER_IMAGE: armanmikoyan/mealai
+  DOCKER_IMAGE: armanmikoyan/plateai
 
 jobs:
   ci:
@@ -91,10 +91,12 @@ jobs:
           script: |
             set -euo pipefail
             docker pull ${{ env.DOCKER_IMAGE }}:latest
+            docker stop plateai 2>/dev/null || true
+            docker rm plateai 2>/dev/null || true
             docker stop mealai 2>/dev/null || true
             docker rm mealai 2>/dev/null || true
             docker run -d \
-              --name mealai \
+              --name plateai \
               --restart unless-stopped \
               -p 3000:3000 \
               ${{ env.DOCKER_IMAGE }}:latest

@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import Snap from '@/app/components/snap';
 
 export const metadata: Metadata = {
-  title: 'Snap a plate · MealAI',
+  title: 'Snap a plate · PlateAI',
   description: 'Upload a meal photo.',
 };
 

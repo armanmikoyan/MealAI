@@ -5,7 +5,7 @@ export const USE_CASES_SECTION = {
   EYEBROW: 'Use cases',
   TITLE: 'Built for how people actually eat',
   SUBTITLE:
-    'Whether you are dialing in macros, managing a busy week, or feeding more than one appetite—MealAi stays out of the way until you need it.',
+    'Whether you are dialing in macros, managing a busy week, or feeding more than one appetite—PlateAI stays out of the way until you need it.',
 } as const;
 
 export type UseCaseCardRow = Readonly<{

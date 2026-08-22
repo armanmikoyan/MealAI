@@ -1,7 +1,7 @@
 export const FAQ_SECTION = {
   EYEBROW: 'FAQ',
   TITLE: 'Answers before you ask',
-  SUBTITLE: 'Straightforward details about how MealAi fits into a real day of eating.',
+  SUBTITLE: 'Straightforward details about how PlateAI fits into a real day of eating.',
 } as const;
 
 export type FaqItemRow = Readonly<{
@@ -15,7 +15,7 @@ export const FAQ_ITEMS: readonly FaqItemRow[] = [
     KEY: 'accuracy',
     QUESTION: 'How accurate are photo-based estimates?',
     ANSWER:
-      'MealAi is built for fast, honest ranges—not lab precision. You get calories and macros you can act on, then adjust portions or ingredients when you want tighter numbers.',
+      'PlateAI is built for fast, honest ranges—not lab precision. You get calories and macros you can act on, then adjust portions or ingredients when you want tighter numbers.',
   },
   {
     KEY: 'privacy',
@@ -27,11 +27,11 @@ export const FAQ_ITEMS: readonly FaqItemRow[] = [
     KEY: 'targets',
     QUESTION: 'Can I set my own macro targets?',
     ANSWER:
-      'Yes. Targets stay yours—MealAi shows how each meal and the rest of the day stack up so you can rebalance without starting over.',
+      'Yes. Targets stay yours—PlateAI shows how each meal and the rest of the day stack up so you can rebalance without starting over.',
   },
   {
     KEY: 'household',
-    QUESTION: 'Does MealAi support more than one person?',
+    QUESTION: 'Does PlateAI support more than one person?',
     ANSWER:
       'Household-ready profiles and shared planning are planned for paid tiers so partners or families can stay aligned on one plan.',
   },

@@ -3,7 +3,7 @@ import type { NavMainSectionLinkRow } from './types';
 /** Top nav — user-visible strings. */
 
 export const NAV = {
-  BRAND: 'MealAi',
+  BRAND: 'PlateAI',
   SEPARATOR: '/',
   HOW_IT_WORKS: 'How it works',
   FEATURES: 'Features',

@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'MealAI',
-  description: 'Meal planning',
+  title: 'PlateAI',
+  description: 'Photo-first nutrition from a snap of your plate.',
   icons: {
     icon: [{ url: '/icons/favicon.svg', type: 'image/svg+xml', sizes: 'any' }],
   },

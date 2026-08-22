@@ -5,7 +5,7 @@ export const HOW_IT_WORKS = {
   EYEBROW: 'How it works',
   TITLE: 'From photo to plan in three steps',
   SUBTITLE:
-    'Point your phone at the plate. MealAI estimates calories and macros, then shows how the rest of your day can still fit your targets.',
+    'Point your phone at the plate. PlateAI estimates calories and macros, then shows how the rest of your day can still fit your targets.',
 } as const;
 
 export type HowItWorksStepRow = Readonly<{

@@ -1,10 +1,10 @@
 export const SITE_FOOTER_MAIN = {
-  BRAND: 'MealAi',
+  BRAND: 'PlateAI',
   TAGLINE: 'Photo-first logging that keeps pace with your day.',
   SUBLINE: 'Estimates, day context, and lists—without living in a spreadsheet.',
   CTA_LINE:
     'Public accounts are on the way. Until then, this page is a living preview of the product.',
-  COPYRIGHT: '© 2026 MealAi. All rights reserved.',
+  COPYRIGHT: '© 2026 PlateAI. All rights reserved.',
   LEGAL_NOTE:
     'Nutrition and health information is for general wellness only and is not medical advice. Consult a clinician for personal guidance.',
 } as const;
@@ -48,7 +48,7 @@ export const SITE_FOOTER_CONNECT = {
   BLURB:
     'Release notes, tips, and product teasers will land on our social channels when the beta opens—watch this space.',
   EMAIL_LABEL: 'Email the team',
-  EMAIL_HREF: 'mailto:hello@mealai.app',
+  EMAIL_HREF: 'mailto:hello@plateai.fit',
   GITHUB_LABEL: 'GitHub',
   GITHUB_HREF: 'https://github.com/armanmikoyan/MealAI',
 } as const;

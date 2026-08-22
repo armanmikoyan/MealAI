@@ -21,7 +21,7 @@ export const FEATURE_CARD_ROWS: readonly FeatureCardRow[] = [
     KEY: 'photo',
     ICON: Image,
     TITLE: 'Photo-first capture',
-    BODY: 'Log with a picture when you do not have weights or barcodes—MealAI fills in the estimate.',
+    BODY: 'Log with a picture when you do not have weights or barcodes—PlateAI fills in the estimate.',
     ICON_SHELL:
       'bg-macro-fat-strong/12 text-macro-fat-strong ring-1 ring-macro-fat-strong/20',
   },
