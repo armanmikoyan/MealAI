@@ -46,11 +46,22 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: ${{ vars.PRODUCTION_URL }}
+      url: ${{ steps.deployment-info.outputs.url }}
     concurrency:
       group: production-deploy
       cancel-in-progress: false
     steps:
+      - name: Set deployment URL
+        id: deployment-info
+        env:
+          PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
+        run: |
+          if [ -z "$PRODUCTION_URL" ]; then
+            echo "::error::PRODUCTION_URL is missing on the production environment."
+            exit 1
+          fi
+          echo "url=$PRODUCTION_URL" >> "$GITHUB_OUTPUT"
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -88,3 +99,6 @@ jobs:
               -p 3000:3000 \
               ${{ env.DOCKER_IMAGE }}:latest
             docker image prune -f
+
+      - name: Deployment summary
+        run: 'echo "Live app: ${{ steps.deployment-info.outputs.url }}"'
