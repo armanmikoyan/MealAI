@@ -1,7 +1,8 @@
 'use client';
 
 import { atom } from 'jotai';
-
-import type { SnapPhoto } from './types';
+import { SNAP_ANALYSIS_STATUS } from './constants';
+import type { SnapAnalysisState, SnapPhoto } from './types';
 
 export const snapPhotoAtom = atom<SnapPhoto | null>(null);
+export const snapAnalysisAtom = atom<SnapAnalysisState>({ STATUS: SNAP_ANALYSIS_STATUS.IDLE });

@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
-
-import { firstAcceptedImageFile, fileFromJpegDataUrl, isAcceptedImageFile } from './utils';
+import { DEVICE_TYPE } from '@/lib/device-detection/types';
+import { SNAP, SNAP_ANALYSIS_STATUS, SNAP_HEADING_PHASE } from './constants';
+import {
+  fileFromJpegDataUrl,
+  firstAcceptedImageFile,
+  isAcceptedImageFile,
+  snapHeadingCopy,
+  snapHeadingPhase,
+} from './utils';
 
 describe('isAcceptedImageFile', () => {
   it('accepts jpeg, png, and webp', () => {
@@ -47,5 +54,64 @@ describe('fileFromJpegDataUrl', () => {
     expect(file.name).toBe('plate.jpg');
     expect(file.type).toBe('image/jpeg');
     expect(file.size).toBeGreaterThan(0);
+  });
+});
+
+describe('snapHeadingCopy', () => {
+  it('uses idle copy when no photo is selected', () => {
+    expect(snapHeadingCopy(null, { STATUS: SNAP_ANALYSIS_STATUS.IDLE }, DEVICE_TYPE.DESKTOP)).toEqual({
+      PHASE: SNAP_HEADING_PHASE.IDLE,
+      TITLE: SNAP.TITLE,
+      SUBTITLE: SNAP.SUBTITLE,
+    });
+  });
+
+  it('uses photo ready copy when a photo is waiting to analyze', () => {
+    expect(
+      snapHeadingPhase({ FILE: new File([], 'plate.jpg'), PREVIEW_URL: 'blob:test' }, { STATUS: SNAP_ANALYSIS_STATUS.IDLE }),
+    ).toBe(SNAP_HEADING_PHASE.PHOTO_READY);
+
+    expect(
+      snapHeadingCopy(
+        { FILE: new File([], 'plate.jpg'), PREVIEW_URL: 'blob:test' },
+        { STATUS: SNAP_ANALYSIS_STATUS.IDLE },
+        DEVICE_TYPE.DESKTOP,
+      ).TITLE,
+    ).toBe(SNAP.HEADING_PHOTO_READY_TITLE);
+  });
+
+  it('uses detected meal name after success', () => {
+    expect(
+      snapHeadingCopy(
+        { FILE: new File([], 'plate.jpg'), PREVIEW_URL: 'blob:test' },
+        {
+          STATUS: SNAP_ANALYSIS_STATUS.SUCCESS,
+          ANALYSIS: {
+            mealName: 'Chicken bowl',
+            calories: 520,
+            proteinG: 42,
+            carbsG: 38,
+            fatG: 18,
+            confidence: 'high',
+            notes: null,
+          },
+        },
+        DEVICE_TYPE.DESKTOP,
+      ),
+    ).toEqual({
+      PHASE: SNAP_HEADING_PHASE.SUCCESS,
+      TITLE: 'Chicken bowl detected',
+      SUBTITLE: SNAP.HEADING_DETECTED_SUBTITLE,
+    });
+  });
+
+  it('uses not detected copy after error', () => {
+    expect(
+      snapHeadingCopy(
+        { FILE: new File([], 'plate.jpg'), PREVIEW_URL: 'blob:test' },
+        { STATUS: SNAP_ANALYSIS_STATUS.ERROR, MESSAGE: SNAP.ANALYSIS_ERROR },
+        DEVICE_TYPE.DESKTOP,
+      ).TITLE,
+    ).toBe(SNAP.HEADING_NOT_DETECTED_TITLE);
   });
 });

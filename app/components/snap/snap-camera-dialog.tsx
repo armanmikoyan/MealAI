@@ -3,7 +3,6 @@
 import { useRef, useState } from 'react';
 import { AlertCircle, Camera, SwitchCamera } from 'lucide-react';
 import Webcam from 'react-webcam';
-
 import { Alert, AlertDescription, AlertTitle } from '@/app/ui/alert';
 import { Button } from '@/app/ui/button';
 import {
@@ -15,7 +14,6 @@ import {
   DialogTitle,
 } from '@/app/ui/dialog';
 import { ToggleGroup, ToggleGroupItem } from '@/app/ui/toggle-group';
-
 import { SNAP, SNAP_CAMERA_BACK, SNAP_CAMERA_CAPTURE_FILE, SNAP_CAMERA_FRONT } from './constants';
 import type { SnapCameraDialogProps, SnapCameraFacing } from './types';
 import { fileFromJpegDataUrl } from './utils';

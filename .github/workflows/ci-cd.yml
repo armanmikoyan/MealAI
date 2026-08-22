@@ -50,17 +50,16 @@ jobs:
     concurrency:
       group: production-deploy
       cancel-in-progress: false
+    env:
+      PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
+      AI_TEST_MODE: ${{ vars.AI_TEST_MODE }}
+      AI_IMAGE_PROVIDER: ${{ vars.AI_IMAGE_PROVIDER }}
+      AI_IMAGE_MODEL: ${{ vars.AI_IMAGE_MODEL }}
+      AI_PROVIDER_API_KEY: ${{ secrets.AI_PROVIDER_API_KEY }}
     steps:
       - name: Set deployment URL
         id: deployment-info
-        env:
-          PRODUCTION_URL: ${{ vars.PRODUCTION_URL }}
-        run: |
-          if [ -z "$PRODUCTION_URL" ]; then
-            echo "::error::PRODUCTION_URL is missing on the production environment."
-            exit 1
-          fi
-          echo "url=$PRODUCTION_URL" >> "$GITHUB_OUTPUT"
+        run: echo "url=${{ env.PRODUCTION_URL }}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -99,6 +98,10 @@ jobs:
               --name plateai \
               --restart unless-stopped \
               -p 3000:3000 \
+              -e AI_TEST_MODE="${{ env.AI_TEST_MODE }}" \
+              -e AI_IMAGE_PROVIDER="${{ env.AI_IMAGE_PROVIDER }}" \
+              -e AI_IMAGE_MODEL="${{ env.AI_IMAGE_MODEL }}" \
+              -e AI_PROVIDER_API_KEY="${{ env.AI_PROVIDER_API_KEY }}" \
               ${{ env.DOCKER_IMAGE }}:latest
             docker image prune -f
 

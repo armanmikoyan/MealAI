@@ -38,14 +38,23 @@ ESLint enforces **kebab-case** folders under `app/components/` (`check-file/fold
 
 ## App structure (features)
 
-Feature folders live under **`app/components/<kebab-case-name>/`**. Typical layout:
+Feature folders live under **`app/components/<kebab-case-name>/`**. Standard files (use only what the feature needs):
 
-- **`constants.ts`** — user-visible copy, plus **any static arrays/objects you `.map()` over** for that feature (row models, class strings, decor layout, etc.): **UPPERCASE** export names and **SCREAMING_SNAKE_CASE** keys (`as const`). Do not put JSX in `constants.ts` (`.ts` only); use ids + render branches in TSX when children are components.
-- **`index.tsx`** — main feature UI (default export). **`app/<route>/page.tsx`** defines a **`Page`** component that renders it (e.g. `return <Feature />`), not a bare re-export of the feature default.
-- **`state.ts`** — **Jotai** atoms and related client state (single file, not a folder).
-- **`utils.ts`** — pure helpers, no Jotai (single file, not a folder).
+| File | Role |
+|------|------|
+| **`index.tsx`** | **Entry point** — default export is the main feature UI. `app/<route>/page.tsx` renders it (`return <Feature />`), not a re-export. |
+| **`constants.ts`** | User-visible copy and static arrays/objects you `.map()` over. **UPPERCASE** export names, **SCREAMING_SNAKE_CASE** keys (`as const`). `.ts` only — no JSX. |
+| **`types.ts`** | Feature types: props, hook results, discriminated state unions. |
+| **`utils.ts`** | Pure helpers — no Jotai, no `fetch`, no browser-only APIs unless clearly gated. |
+| **`hooks.ts`** | Client hooks (`'use client'`). Compose **`state.ts`** atoms; keep side effects here, not in `utils.ts`. |
+| **`state.ts`** | **Jotai atoms only** (single file). Types for atom values live in **`types.ts`**. |
+| **`<kebab-name>.tsx`** | Subcomponents (e.g. `snap-upload-panel.tsx`). **Import the file directly** — `@/app/components/snap/snap-upload-panel` or `./snap-upload-panel`. |
 
-**`app/ui/`** is for **design-system** controls built on Base UI / shadcn-style patterns (e.g. `button.tsx`). Import the file you need (e.g. `@/app/ui/button`) — no barrel in `app/ui/`. **App chrome**, marketing sections, and **reusable composition components** (e.g. `scroll/`, `icon-text-card/`) live under **`app/components/<kebab-name>/`**, not in `app/ui/`.
+**Do not** add barrel files (`index.ts` that re-exports siblings, or re-export subcomponents through `index.tsx`). **`app/ui/`** has no barrel either — import the concrete file (e.g. `@/app/ui/button`).
+
+**`app/ui/`** is for **design-system** controls built on Base UI / shadcn-style patterns (e.g. `button.tsx`). **App chrome**, marketing sections, and **reusable composition components** (e.g. `scroll/`, `icon-text-card/`) live under **`app/components/<kebab-name>/`**, not in `app/ui/`.
+
+Shared server/domain logic that is not feature UI (e.g. AI providers) belongs under **`lib/<kebab-name>/`**, not inside `app/components/`.
 
 App-wide **metadata** strings used only by the root layout live in **`app/layout.tsx`** next to `export const metadata` (e.g. `SITE_METADATA` with **SCREAMING_SNAKE_CASE** keys — same convention as feature `constants.ts`).
 

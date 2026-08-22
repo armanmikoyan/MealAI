@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState, type DragEvent, type MouseEvent } from 'react';
-import { AlertCircle, Camera, ImageUp, Trash2, Upload } from 'lucide-react';
-import Image from 'next/image';
-
+import { useEffect, useRef, useState, type DragEvent, type MouseEvent, type ReactNode } from 'react';
+import { AlertCircle, Camera, ImageUp, Upload } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/app/ui/alert';
 import { Button } from '@/app/ui/button';
 import {
@@ -15,17 +13,17 @@ import {
   EmptyTitle,
 } from '@/app/ui/empty';
 import { cn } from '@/lib/utils';
-
 import { DEVICE_TYPE } from '@/lib/device-detection/types';
 import { useDeviceType } from '@/lib/device-detection/use-device-type';
-
-import { ACCEPTED_IMAGE_ACCEPT, SNAP } from './constants';
+import { ACCEPTED_IMAGE_ACCEPT, SNAP, SNAP_ANALYSIS_STATUS } from './constants';
+import { useSnapAnalyze, useSnapPhoto } from './hooks';
+import { SnapAnalysisStage, SnapPhotoStage } from './snap-stage';
 import { SnapCameraDialog } from './snap-camera-dialog';
-import { useSnapPhoto } from './hook';
-import { blobImageLoader, canUseCameraStream, firstAcceptedImageFile } from './utils';
+import { canUseCameraStream, firstAcceptedImageFile } from './utils';
 
 export function SnapUploadPanel() {
   const { photo, setPhoto } = useSnapPhoto();
+  const { analysisState, analyzePhoto } = useSnapAnalyze();
   const deviceType = useDeviceType();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
@@ -33,6 +31,9 @@ export function SnapUploadPanel() {
   const [isDragging, setIsDragging] = useState(false);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const showAnalysisLayout = Boolean(photo) && analysisState.STATUS !== SNAP_ANALYSIS_STATUS.IDLE;
+  const photoActionsDisabled = analysisState.STATUS === SNAP_ANALYSIS_STATUS.LOADING;
 
   useEffect(() => {
     return () => {
@@ -85,52 +86,105 @@ export function SnapUploadPanel() {
     applyFile(firstAcceptedImageFile(event.dataTransfer.files));
   }
 
-  const actions = (
+  function openGallery() {
+    fileInputRef.current?.click();
+  }
+
+  function openCamera() {
+    if (!canUseCameraStream()) {
+      if (deviceType === DEVICE_TYPE.PHONE) {
+        cameraInputRef.current?.click();
+        return;
+      }
+
+      setError(SNAP.ERROR_CAMERA_SECURE);
+      return;
+    }
+
+    setIsCameraOpen(true);
+  }
+
+  function removePhoto() {
+    setError(null);
+    setPhoto(null);
+  }
+
+  const emptyActions = (
     <div className="flex flex-wrap items-center justify-center gap-2">
-      <Button
-        type="button"
-        variant="outline"
-        onClick={() => {
-          fileInputRef.current?.click();
-        }}
-      >
+      <Button type="button" variant="outline" onClick={openGallery}>
         <ImageUp data-icon="inline-start" />
-        {photo ? SNAP.REPLACE : SNAP.GALLERY}
+        {SNAP.GALLERY}
       </Button>
-      <Button
-        type="button"
-        onClick={() => {
-          if (!canUseCameraStream()) {
-            if (deviceType === DEVICE_TYPE.PHONE) {
-              cameraInputRef.current?.click();
-              return;
-            }
-
-            setError(SNAP.ERROR_CAMERA_SECURE);
-            return;
-          }
-
-          setIsCameraOpen(true);
-        }}
-      >
+      <Button type="button" onClick={openCamera}>
         <Camera data-icon="inline-start" />
         {SNAP.CAMERA}
       </Button>
-      {photo ? (
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={() => {
-            setError(null);
-            setPhoto(null);
-          }}
-        >
-          <Trash2 data-icon="inline-start" />
-          {SNAP.REMOVE}
-        </Button>
-      ) : null}
     </div>
   );
+
+  const photoActions = {
+    onReplace: openGallery,
+    onCamera: openCamera,
+    onRemove: removePhoto,
+  };
+
+  let mainContent: ReactNode;
+
+  if (showAnalysisLayout && photo) {
+    mainContent = (
+      <SnapAnalysisStage
+        analysisState={analysisState}
+        photo={photo}
+        photoActions={photoActions}
+        photoActionsDisabled={photoActionsDisabled}
+      />
+    );
+  } else if (photo) {
+    mainContent = (
+      <SnapPhotoStage
+        photo={photo}
+        photoActions={photoActions}
+        onAnalyze={() => {
+          void analyzePhoto();
+        }}
+      />
+    );
+  } else {
+    mainContent = (
+      <Empty
+        className={cn(
+          'min-h-72 flex-1 sm:min-h-112 lg:min-h-128',
+          deviceType === DEVICE_TYPE.PHONE
+            ? 'border'
+            : 'cursor-pointer border-4 border-dashed',
+          deviceType === DEVICE_TYPE.DESKTOP && isDragging && 'border-cta bg-muted/40',
+        )}
+        onClick={handleZoneClick}
+        {...(deviceType === DEVICE_TYPE.PHONE
+          ? {}
+          : {
+              onDragEnter: handleDragEnter,
+              onDragLeave: handleDragLeave,
+              onDragOver: handleDragOver,
+              onDrop: handleDrop,
+            })}
+      >
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <Upload aria-hidden />
+          </EmptyMedia>
+          <EmptyTitle>
+            {deviceType === DEVICE_TYPE.PHONE ? SNAP.DROP_TITLE_PHONE : SNAP.DROP_TITLE}
+          </EmptyTitle>
+          <EmptyDescription>{SNAP.DROP_BODY}</EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          {deviceType === DEVICE_TYPE.DESKTOP ? <p>{SNAP.DROP_HINT}</p> : null}
+          {emptyActions}
+        </EmptyContent>
+      </Empty>
+    );
+  }
 
   return (
     <div className="flex min-h-0 flex-1 flex-col gap-3">
@@ -157,55 +211,7 @@ export function SnapUploadPanel() {
           event.target.value = '';
         }}
       />
-      {photo ? (
-        <div className="flex min-h-0 flex-1 flex-col gap-4">
-          <div className="bg-muted relative min-h-72 flex-1 overflow-hidden rounded-xl border sm:min-h-112 lg:min-h-128">
-            <Image
-              src={photo.PREVIEW_URL}
-              alt={SNAP.PREVIEW_ALT}
-              fill
-              unoptimized
-              loader={blobImageLoader}
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          {actions}
-        </div>
-      ) : (
-        <Empty
-          className={cn(
-            'min-h-72 flex-1 sm:min-h-112 lg:min-h-128',
-            deviceType === DEVICE_TYPE.PHONE
-              ? 'border'
-              : 'cursor-pointer border-4 border-dashed',
-            deviceType === DEVICE_TYPE.DESKTOP && isDragging && 'border-cta bg-muted/40',
-          )}
-          onClick={handleZoneClick}
-          {...(deviceType === DEVICE_TYPE.PHONE
-            ? {}
-            : {
-                onDragEnter: handleDragEnter,
-                onDragLeave: handleDragLeave,
-                onDragOver: handleDragOver,
-                onDrop: handleDrop,
-              })}
-        >
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <Upload aria-hidden />
-            </EmptyMedia>
-            <EmptyTitle>
-              {deviceType === DEVICE_TYPE.PHONE ? SNAP.DROP_TITLE_PHONE : SNAP.DROP_TITLE}
-            </EmptyTitle>
-            <EmptyDescription>{SNAP.DROP_BODY}</EmptyDescription>
-          </EmptyHeader>
-          <EmptyContent>
-            {deviceType === DEVICE_TYPE.DESKTOP ? <p>{SNAP.DROP_HINT}</p> : null}
-            {actions}
-          </EmptyContent>
-        </Empty>
-      )}
+      {mainContent}
       {error ? (
         <Alert variant="destructive">
           <AlertCircle />
